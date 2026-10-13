@@ -1,0 +1,89 @@
+.confirmacao-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .confirmacao-icon {
+            width: 80px;
+            height: 80px;
+            background: #E8F0E4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border: 2px solid #B8D8A8;
+        }
+        .confirmacao-icon i {
+            font-size: 36px;
+            color: #3A6A2E;
+        }
+        .confirmacao-titulo {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--marrom-escuro);
+            margin-bottom: 8px;
+        }
+        .confirmacao-sub {
+            font-size: 14px;
+            color: var(--texto-claro);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .confirmacao-detalhes {
+            background: var(--branco);
+            border: 1px solid var(--borda);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: left;
+            margin-bottom: 28px;
+            box-shadow: var(--sombra);
+        }
+        .confirmacao-detalhes h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--marrom-escuro);
+            margin-bottom: 16px;
+        }
+        .detalhe-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--bege-fundo);
+            font-size: 14px;
+        }
+        .detalhe-item:last-child {
+            border-bottom: none;
+        }
+        .detalhe-chave {
+            color: var(--texto-claro);
+        }
+        .detalhe-valor {
+            color: var(--marrom-escuro);
+            font-weight: 500;
+        }
+        .btn-grande {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-size: 15px;
+        }
+
+/* ── Botão Voltar ao painel (mesmo estilo do orçamento) ── */
+.btn-voltar-painel {
+    background: transparent;
+    color: var(--marrom-escuro);
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--bege-escuro);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.btn-voltar-painel:hover {
+    border-color: var(--bark);
+    color: var(--texto);
+}

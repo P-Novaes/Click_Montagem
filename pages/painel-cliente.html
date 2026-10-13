@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Cliente — Click Montagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/painel-cliente.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-left">
+        <img src="../assets/img/LogoClick.png" class="logo-img" alt="Click Montagem">
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="painel-cliente.html" class="active">Painel</a></li>
+        <li><a href="orcamento.html">Novo orçamento</a></li>
+        <li><a href="propostas.html">Propostas</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <a href="editar_perfil.html" class="nav-avatar" title="Editar perfil">JS</a>
+        <span class="nav-username">João Silva</span>
+        <button class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="painel-cliente.html" class="active">Painel</a>
+    <a href="orcamento.html">Novo orçamento</a>
+    <a href="propostas.html">Propostas</a>
+    <a href="editar_perfil.html">Editar perfil</a>
+</div>
+
+<main class="page">
+
+    <!-- Welcome Bar -->
+    <div class="welcome-bar fade-up">
+        <div>
+            <p class="welcome-text">Olá, <em>João!</em></p>
+            <p class="welcome-sub">Você tem 1 proposta aguardando e 2 agendamentos esta semana.</p>
+        </div>
+        <a href="orcamento.html"><button class="btn btn-primary btn-lg">+ Novo orçamento</button></a>
+    </div>
+
+    <!-- Quick Grid -->
+    <div class="quick-grid">
+        <a href="orcamento.html" class="quick-card fade-up-1">
+            <div class="qc-icon qc-oak">
+                <i class="fas fa-plus"></i>
+            </div>
+            <p class="qc-title">Solicitar orçamento</p>
+            <p class="qc-sub">Monte novos móveis</p>
+        </a>
+        <a href="propostas.html" class="quick-card fade-up-2">
+            <div class="qc-icon qc-warn">
+                <i class="fas fa-file-invoice"></i>
+            </div>
+            <p class="qc-title">Ver propostas</p>
+            <p class="qc-sub">1 aguardando ação</p>
+        </a>
+        <!-- ✅ CORRIGIDO: Buscar montadores aponta para index.html#montadores -->
+        <a href="../index.html#montadores" class="quick-card fade-up-3">
+            <div class="qc-icon qc-green">
+                <i class="fas fa-users"></i>
+            </div>
+            <p class="qc-title">Buscar montadores</p>
+            <p class="qc-sub">2.4k profissionais</p>
+        </a>
+    </div>
+
+    <!-- Review Prompt -->
+    <div class="review-prompt fade-up">
+        <div class="rp-left">
+            <div class="avatar av-sm">MO</div>
+            <div>
+                <p class="rp-text">Avalie Marcos Oliveira</p>
+                <p class="rp-sub">Serviço concluído em 18 abr · Guarda-roupa</p>
+            </div>
+        </div>
+        <a href="avaliacao.html"><button class="btn btn-primary">Avaliar agora ↗</button></a>
+    </div>
+
+    <!-- Próximos Agendamentos -->
+    <div id="agendamentos">
+        <div class="section-header">
+            <h2 class="section-h2">Próximos agendamentos</h2>
+            <a href="orcamento.html"><button class="btn btn-ghost">Novo orçamento</button></a>
+        </div>
+
+        <div class="agend-card fade-up-1">
+            <div class="agend-left">
+                <div class="agend-date">
+                    <div class="agend-date-d">21</div>
+                    <div class="agend-date-m">ABR</div>
+                </div>
+                <div class="agend-info">
+                    <p class="agend-title">Guarda-roupa 6 portas</p>
+                    <p class="agend-meta">Marcos Oliveira · 09:00 · Consolação, SP</p>
+                </div>
+            </div>
+            <div class="agend-right">
+                <div class="agend-price">
+                    <span class="currency">R$</span><span class="amount">180</span>
+                </div>
+                <span class="tag tag-ok">Confirmado</span>
+            </div>
+        </div>
+
+        <div class="agend-card fade-up-2">
+            <div class="agend-left">
+                <div class="agend-date">
+                    <div class="agend-date-d">29</div>
+                    <div class="agend-date-m">ABR</div>
+                </div>
+                <div class="agend-info">
+                    <p class="agend-title">Cozinha planejada</p>
+                    <p class="agend-meta">Roberto Lima · 13:00 · Moema, SP</p>
+                </div>
+            </div>
+            <div class="agend-right">
+                <div class="agend-price">
+                    <span class="currency">R$</span><span class="amount">320</span>
+                </div>
+                <span class="tag tag-pend">Pendente</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Histórico de Serviços -->
+    <div style="margin-top: 28px;">
+        <div class="section-header">
+            <h2 class="section-h2">Histórico de serviços</h2>
+        </div>
+        <div class="card">
+            <div class="hist-item">
+                <div class="hist-left">
+                    <div class="avatar av-sm">MO</div>
+                    <div class="hist-info">
+                        <p class="hist-title">Rack e TV</p>
+                        <p class="hist-meta">Marcos Oliveira · 10 abr</p>
+                    </div>
+                </div>
+                <div class="hist-right">
+                    <div class="hist-price">R$ 120</div>
+                    <span class="tag tag-done">Concluído</span>
+                    <span class="stars-sm">★ 5.0</span>
+                </div>
+            </div>
+            <div class="hist-item">
+                <div class="hist-left">
+                    <div class="avatar av-sm">RL</div>
+                    <div class="hist-info">
+                        <p class="hist-title">Berço</p>
+                        <p class="hist-meta">Roberto Lima · 2 abr</p>
+                    </div>
+                </div>
+                <div class="hist-right">
+                    <div class="hist-price">R$ 90</div>
+                    <span class="tag tag-done">Concluído</span>
+                    <span class="stars-sm">★ 4.0</span>
+                </div>
+            </div>
+            <div class="hist-item">
+                <div class="hist-left">
+                    <div class="avatar av-sm">AS</div>
+                    <div class="hist-info">
+                        <p class="hist-title">Mesa de jantar</p>
+                        <p class="hist-meta">Ana Santos · 15 mar</p>
+                    </div>
+                </div>
+                <div class="hist-right">
+                    <div class="hist-price">R$ 150</div>
+                    <span class="tag tag-done">Concluído</span>
+                    <span class="stars-sm">★ 5.0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- ✅ FOOTER CORRIGIDO -->
+<footer class="footer">
+    <div class="footer-links">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-sep">—</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-sep">—</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/painel-cliente.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

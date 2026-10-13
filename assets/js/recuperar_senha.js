@@ -1,0 +1,79 @@
+// ================================================================
+//  recuperar_senha.js — Recuperação de Senha conectada ao banco
+//  Caminho: htdocs/click_montagem/assets/js/recuperar_senha.js
+// ================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form           = document.getElementById('recuperarForm');
+    const formSection    = document.getElementById('formSection');
+    const sucessoSection = document.getElementById('sucessoSection');
+    const emailEnviado   = document.getElementById('emailEnviado');
+    const reenviarLink   = document.getElementById('reenviarLink');
+    const msgErro        = document.getElementById('msgErro');
+    const erroTexto      = document.getElementById('erroTexto');
+    const btnEnviar      = document.getElementById('btnEnviar');
+
+    if (!form) return;
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            mostrarErro('Por favor, informe um e-mail válido.');
+            return;
+        }
+
+        const textoOriginal = btnEnviar?.innerHTML;
+        if (btnEnviar) {
+            btnEnviar.disabled = true;
+            btnEnviar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando…';
+        }
+
+        try {
+            const res = await API.usuarios.recuperarSenha(email);
+
+            // Armazena token temporário para permitir a tela de redefinição
+            localStorage.setItem('recuperacaoToken', JSON.stringify({
+                email:  email,
+                token:  res.token || 'click_token',
+                expira: Date.now() + 3600000 // 1 hora
+            }));
+
+            emailEnviado.innerHTML = `<strong>${email}</strong><br><br><a href="redefinir_senha.html?token=${res.token}&email=${encodeURIComponent(email)}" class="btn btn-primary" style="display:inline-block; margin-top:8px;">Redefinir Senha Agora ↗</a>`;
+            formSection.style.display = 'none';
+            sucessoSection.classList.add('show');
+
+        } catch (err) {
+            mostrarErro(err.message || 'E-mail não encontrado em nossa base de usuários.');
+        } finally {
+            if (btnEnviar) {
+                btnEnviar.disabled = false;
+                btnEnviar.innerHTML = textoOriginal;
+            }
+        }
+    });
+
+    function mostrarErro(msg) {
+        if (erroTexto) erroTexto.textContent = msg;
+        if (msgErro) {
+            msgErro.classList.add('show');
+            setTimeout(() => msgErro.classList.remove('show'), 5000);
+        } else {
+            alert(msg);
+        }
+    }
+
+    if (reenviarLink) {
+        reenviarLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            sucessoSection.classList.remove('show');
+            formSection.style.display = 'block';
+            const emailInp = document.getElementById('email');
+            if (emailInp) {
+                emailInp.value = '';
+                emailInp.focus();
+            }
+        });
+    }
+});

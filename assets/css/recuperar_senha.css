@@ -1,0 +1,212 @@
+/* ============================================
+   RECUPERAR SENHA - Click Montagem
+   Visual adaptado para usar navbar/rodapé do login
+   ============================================ */
+
+/* Container da caixa (dentro do .login-wrapper) */
+.recuperar-form-container {
+    width: 100%;
+    max-width: 440px;
+    background: var(--bege-claro);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.recuperar-box {
+    width: 100%;
+}
+
+/* Títulos */
+.recuperar-box h1 {
+    font-size: 1.75rem;
+    color: var(--marrom-escuro);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.recuperar-box h1 i {
+    color: var(--dourado);
+    font-size: 1.5rem;
+}
+
+.recuperar-box .subtitle {
+    color: var(--cinza);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ===== FORMULÁRIO ===== */
+.recuperar-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.recuperar-form label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--marrom-escuro);
+    margin-bottom: 0.5rem;
+}
+
+.recuperar-form .input-icon {
+    position: relative;
+}
+
+.recuperar-form .input-icon i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dourado);
+    font-size: 1rem;
+    z-index: 2;
+}
+
+.recuperar-form .input-icon input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 2.75rem;
+    border: 2px solid var(--bege-escuro);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--branco);
+    color: var(--marrom-escuro);
+    transition: var(--transicao);
+}
+
+.recuperar-form .input-icon input:focus {
+    outline: none;
+    border-color: var(--dourado);
+    box-shadow: 0 0 0 3px rgba(204, 153, 102, 0.15);
+}
+
+.recuperar-form .input-icon input::placeholder {
+    color: var(--text-muted);
+}
+
+/* ===== BOTÃO ===== */
+.recuperar-form .btn-primary {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* ===== LINKS ===== */
+.recuperar-links {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--cinza);
+}
+
+.recuperar-links a {
+    color: var(--dourado);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transicao);
+}
+
+.recuperar-links a:hover {
+    color: var(--dourado);
+    text-decoration: underline;
+}
+
+/* ===== ESTADO DE SUCESSO ===== */
+.recuperar-sucesso {
+    text-align: center;
+    padding: 2rem 0;
+    display: none;
+}
+
+.recuperar-sucesso.show {
+    display: block;
+    animation: fadeInUp 0.5s ease;
+}
+
+.recuperar-sucesso .icone-sucesso {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--verde) 0%, #27ae60 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+}
+
+.recuperar-sucesso .icone-sucesso i {
+    font-size: 2.5rem;
+    color: var(--branco);
+}
+
+.recuperar-sucesso h2 {
+    font-size: 1.5rem;
+    color: var(--marrom-escuro);
+    margin-bottom: 0.75rem;
+}
+
+.recuperar-sucesso p {
+    color: var(--cinza);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.recuperar-sucesso .email-destaque {
+    color: var(--marrom-escuro);
+    font-weight: 600;
+    background: var(--bege-medio);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin: 0.5rem 0;
+}
+
+/* ===== MENSAGEM DE ERRO ===== */
+.msg-erro {
+    background: #fdeaea;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 0.875rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.msg-erro.show {
+    display: flex;
+    animation: shake 0.4s ease;
+}
+
+.msg-erro i {
+    font-size: 1.1rem;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 480px) {
+    .recuperar-form-container {
+        padding: 2rem 1.25rem;
+    }
+
+    .recuperar-box h1 {
+        font-size: 1.5rem;
+    }
+
+    .recuperar-form .input-icon input {
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        font-size: 0.95rem;
+    }
+}

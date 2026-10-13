@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento Enviado — Click Montagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/confirmacao-orcamento.css">
+</head>
+<body>
+
+<!-- Nav do cliente (João Silva logado) -->
+<nav class="nav">
+    <div class="nav-left">
+        <a href="../index.html" class="nav-logo">
+            <img src="../assets/img/LogoClick.png" alt="Click Montagem" class="nav-logo-img" style="height:40px;">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="painel-cliente.html">Painel</a></li>
+        <li><a href="orcamento.html">Novo orçamento</a></li>
+        <li><a href="propostas.html">Propostas</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <a href="editar_perfil.html" class="nav-avatar" title="Editar perfil">JS</a>
+        <span class="nav-username">João Silva</span>
+        <button class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="painel-cliente.html">Painel</a>
+    <a href="orcamento.html">Novo orçamento</a>
+    <a href="propostas.html">Propostas</a>
+    <a href="editar_perfil.html">Editar perfil</a>
+</div>
+
+<main class="page">
+    <div class="confirmacao-container">
+
+        <div class="confirmacao-icon">
+            <i class="fas fa-check"></i>
+        </div>
+
+        <h1 class="confirmacao-titulo">Orçamento enviado com sucesso!</h1>
+        <p class="confirmacao-sub">
+            Seu pedido de orçamento foi enviado. Em breve você receberá propostas de montadores qualificados. 
+            Fique de olho no seu painel e no e-mail cadastrado.
+        </p>
+
+        <div class="confirmacao-detalhes">
+            <h3>Resumo do pedido</h3>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Categoria</span>
+                <span class="detalhe-valor">Planejados</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Tipo de móvel</span>
+                <span class="detalhe-valor">Guarda-roupa 6 portas</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Quantidade de peças</span>
+                <span class="detalhe-valor">2 peças</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Preferência de horário</span>
+                <span class="detalhe-valor">Manhã</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Estimativa</span>
+                <span class="detalhe-valor" style="color: var(--dourado); font-weight: 700;">R$ 300 – 500</span>
+            </div>
+        </div>
+
+        <a href="propostas.html">
+            <button class="btn btn-primary btn-grande">
+                <i class="fas fa-file-invoice"></i> Ver propostas recebidas
+            </button>
+        </a>
+        <a href="painel-cliente.html" style="display: block; margin-top: 14px;">
+            <button class="btn btn-ghost btn-voltar-painel">
+                ← Voltar ao painel
+            </button>
+        </a>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-links">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-sep">—</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-sep">—</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/script.js"></script>
+</body>
+</html>

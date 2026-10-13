@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click Montagem — Guia de Instalação XAMPP</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap');
+
+  :root {
+    --marrom:   #3d2008;
+    --dourado:  #c89b5a;
+    --bege:     #f5ede0;
+    --verde:    #1e6b45;
+    --azul:     #1a4b6e;
+    --vermelho: #8b1a1a;
+    --bg:       #1a1208;
+    --card:     #251a0e;
+    --borda:    #3a2a18;
+    --texto:    #e8d5b7;
+    --muted:    #8a7055;
+    --code-bg:  #0f0a04;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    line-height: 1.7;
+  }
+
+  /* ── Header ── */
+  .hero {
+    background: linear-gradient(135deg, #1a1208 0%, #2d1a08 50%, #1a1208 100%);
+    border-bottom: 1px solid var(--borda);
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,155,90,.15) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(200,155,90,.12);
+    border: 1px solid var(--dourado);
+    color: var(--dourado);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--dourado); }
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── Layout ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 60px 0; border-bottom: 1px solid var(--borda); }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dourado);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+
+  /* ── Steps ── */
+  .steps { display: flex; flex-direction: column; gap: 20px; }
+  .step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .step-num {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(200,155,90,.12);
+    border: 2px solid var(--dourado);
+    color: var(--dourado);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .step-body h3 { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .step-body p  { color: var(--muted); font-size: 0.95rem; margin-bottom: 10px; }
+
+  /* ── Pastas ── */
+  .tree {
+    background: var(--code-bg);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 24px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 2;
+    color: #c8a87a;
+    overflow-x: auto;
+  }
+  .tree .dir  { color: var(--dourado); font-weight: 600; }
+  .tree .file { color: #8a7055; }
+  .tree .new  { color: #5fa876; }
+  .tree .note { color: var(--muted); font-size: 12px; }
+
+  /* ── Código ── */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .code-header {
+    background: rgba(200,155,90,.08);
+    border-bottom: 1px solid var(--borda);
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .code-lang {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dourado);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .copy-btn {
+    background: rgba(200,155,90,.12);
+    border: 1px solid var(--dourado);
+    color: var(--dourado);
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all .2s;
+  }
+  .copy-btn:hover { background: var(--dourado); color: var(--bg); }
+  .copy-btn.copied { background: var(--verde); border-color: var(--verde); color: #fff; }
+
+  pre {
+    padding: 20px 22px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #d4b896;
+  }
+  .kw  { color: #c792ea; }
+  .fn  { color: #82aaff; }
+  .str { color: #c3e88d; }
+  .cmt { color: #546e7a; }
+  .num { color: #f78c6c; }
+
+  /* ── Tabela de rotas ── */
+  .routes-table { width: 100%; border-collapse: collapse; }
+  .routes-table th {
+    background: rgba(200,155,90,.1);
+    color: var(--dourado);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--borda);
+  }
+  .routes-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(58,42,24,.5);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .routes-table tr:last-child td { border-bottom: none; }
+  .routes-table tr:hover td { background: rgba(200,155,90,.04); }
+
+  .method {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .method.get  { background: rgba(30,107,69,.25); color: #5fa876; border: 1px solid #1e6b45; }
+  .method.post { background: rgba(26,75,110,.25); color: #6baad4; border: 1px solid #1a4b6e; }
+
+  .url-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #8ab4d4;
+  }
+
+  /* ── Alertas ── */
+  .alert {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 0.92rem;
+  }
+  .alert-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+  .alert.warn  { background: rgba(200,155,90,.1);  border: 1px solid rgba(200,155,90,.4); }
+  .alert.info  { background: rgba(26,75,110,.2);   border: 1px solid rgba(26,75,110,.6); }
+  .alert.ok    { background: rgba(30,107,69,.2);   border: 1px solid rgba(30,107,69,.6); }
+  .alert.err   { background: rgba(139,26,26,.2);   border: 1px solid rgba(139,26,26,.5); }
+  .alert strong { display: block; margin-bottom: 4px; color: #fff; }
+
+  /* ── Tags de erros comuns ── */
+  .err-list { display: flex; flex-direction: column; gap: 12px; }
+  .err-item {
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .err-item .err-titulo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #e57070;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .err-item p   { color: var(--muted); font-size: 0.9rem; }
+  .err-item .fix { color: #5fa876; margin-top: 6px; font-size: 0.9rem; }
+
+  /* ── Grid de cards ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; }
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .info-card h3 { font-size: 1rem; color: var(--dourado); margin-bottom: 8px; }
+  .info-card p  { font-size: 0.88rem; color: var(--muted); }
+  .info-card code {
+    background: var(--code-bg);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #c3e88d;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .step { grid-template-columns: 36px 1fr; gap: 14px; }
+    .step-num { width: 36px; height: 36px; font-size: .9rem; }
+    pre { font-size: 12px; }
+    .hero { padding: 40px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">v1.0 — XAMPP + phpMyAdmin</div>
+  <h1><span>Click Montagem</span><br>Guia de Instalação Completo</h1>
+  <p>Passo a passo para colocar o sistema funcionando 100% no localhost com XAMPP, phpMyAdmin e PHP.</p>
+</div>
+
+<div class="container">
+
+<!-- ── SEÇÃO 1: ESTRUTURA ── -->
+<section class="section">
+  <div class="section-label">Passo 01</div>
+  <h2>Estrutura de Pastas</h2>
+  <p style="color:var(--muted);margin-bottom:20px">Crie esta estrutura exata dentro da pasta <code style="color:var(--dourado);font-family:'JetBrains Mono',monospace">htdocs</code> do XAMPP:</p>
+
+  <div class="tree">
+<span class="cmt"># Windows: C:\xampp\htdocs\</span>
+<span class="cmt"># Mac/Linux: /Applications/XAMPP/htdocs/  ou  /opt/lampp/htdocs/</span>
+
+<span class="dir">htdocs/</span>
+└── <span class="dir">click_montagem/</span>
+    ├── <span class="dir">html/</span>
+    │   ├── <span class="new">login.html</span>          <span class="note">← sua página de login</span>
+    │   ├── <span class="new">orcamento.html</span>      <span class="note">← formulário de orçamento</span>
+    │   └── <span class="new">propostas.html</span>      <span class="note">← lista de propostas</span>
+    ├── <span class="dir">css/</span>
+    │   ├── <span class="new">shared.css</span>
+    │   ├── <span class="new">login.css</span>
+    │   ├── <span class="new">orcamento.css</span>
+    │   └── <span class="new">propostas.css</span>
+    ├── <span class="dir">js/</span>
+    │   ├── <span class="new">api.js</span>              <span class="note">← NOVO: módulo central da API</span>
+    │   ├── <span class="new">login.js</span>
+    │   ├── <span class="new">orcamento.js</span>
+    │   └── <span class="new">propostas.js</span>
+    ├── <span class="dir">php/</span>
+    │   ├── <span class="new">conexao.php</span>         <span class="note">← inclua em todos os outros</span>
+    │   ├── <span class="new">usuarios.php</span>
+    │   ├── <span class="new">orcamentos.php</span>
+    │   └── <span class="new">propostas.php</span>
+    └── <span class="file">click_montagem.sql</span>  <span class="note">← importe no phpMyAdmin</span>
+  </div>
+</section>
+
+<!-- ── SEÇÃO 2: BANCO ── -->
+<section class="section">
+  <div class="section-label">Passo 02</div>
+  <h2>Importar o Banco de Dados</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Inicie o XAMPP</h3>
+        <p>Abra o XAMPP Control Panel e clique em <strong>Start</strong> nos serviços <strong>Apache</strong> e <strong>MySQL</strong>. Ambos devem ficar verdes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Abra o phpMyAdmin</h3>
+        <p>Acesse no navegador:</p>
+        <div class="code-block">
+          <pre>http://localhost/phpmyadmin</pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Importe o SQL</h3>
+        <p>Clique em <strong>Importar</strong> (menu superior) → <strong>Escolher arquivo</strong> → selecione <code>click_montagem.sql</code> → clique em <strong>Executar</strong>.</p>
+        <div class="alert ok">
+          <span class="alert-icon">✓</span>
+          <div>O banco <strong>click_montagem</strong> será criado automaticamente com as tabelas <strong>usuarios</strong>, <strong>orcamentos</strong> e <strong>propostas</strong>, mais dados de exemplo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SEÇÃO 3: ORDEM DOS SCRIPTS NOS HTML ── -->
+<section class="section">
+  <div class="section-label">Passo 03</div>
+  <h2>Ordem Correta dos Scripts nos HTMLs</h2>
+  <p style="color:var(--muted);margin-bottom:16px">Inclua <strong>api.js antes</strong> de qualquer outro JS do projeto:</p>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-lang">HTML — antes do &lt;/body&gt;</span>
+      <button class="copy-btn" onclick="copiar(this)">Copiar</button>
+    </div>
+    <pre><span class="cmt">&lt;!-- login.html, orcamento.html, propostas.html --&gt;</span>
+
+<span class="cmt">&lt;!-- 1. Módulo central da API (obrigatório primeiro) --&gt;</span>
+&lt;<span class="kw">script</span> src=<span class="str">"../js/api.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+
+<span class="cmt">&lt;!-- 2. Script específico da página --&gt;</span>
+&lt;<span class="kw">script</span> src=<span class="str">"../js/login.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+<span class="cmt">&lt;!-- ou: orcamento.js / propostas.js --&gt;</span></pre>
+  </div>
+
+  <div class="alert warn">
+    <span class="alert-icon">⚠</span>
+    <div><strong>Atenção nos caminhos</strong> — como os HTMLs estão em <code>/html/</code>, o caminho correto para os scripts é <code>../js/api.js</code> (dois pontos + barra = subir um nível).</div>
+  </div>
+</section>
+
+<!-- ── SEÇÃO 4: ROTAS DA API ── -->
+<section class="section">
+  <div class="section-label">Referência</div>
+  <h2>Todas as Rotas da API</h2>
+
+  <h3 style="color:var(--dourado);margin:24px 0 12px">Usuários</h3>
+  <div class="code-block" style="overflow:auto">
+    <table class="routes-table">
+      <thead><tr><th>Método</th><th>URL</th><th>Body / Params</th><th>Retorno</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/usuarios.php?action=cadastrar</td>
+          <td style="color:var(--muted);font-size:12px">{ nome, email, telefone, senha, tipo }</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, usuario: {id,nome,tipo} }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/usuarios.php?action=login</td>
+          <td style="color:var(--muted);font-size:12px">{ email, senha }</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, usuario: {id,nome,tipo} }</td>
+        </tr>
+        <tr>
+          <td><span class="method get">GET</span></td>
+          <td class="url-cell">/php/usuarios.php?action=perfil&id=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, usuario }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/usuarios.php?action=atualizar&id=1</td>
+          <td style="color:var(--muted);font-size:12px">{ nome, telefone }</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, mensagem }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/usuarios.php?action=deletar&id=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, mensagem }</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="color:var(--dourado);margin:24px 0 12px">Orçamentos</h3>
+  <div class="code-block" style="overflow:auto">
+    <table class="routes-table">
+      <thead><tr><th>Método</th><th>URL</th><th>Body / Params</th><th>Retorno</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/orcamentos.php?action=criar</td>
+          <td style="color:var(--muted);font-size:12px">{ usuario_id, categoria, tipo_movel, quantidade_pecas, complexidade, cep, bairro, horario, preco_estimado }</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, id }</td>
+        </tr>
+        <tr>
+          <td><span class="method get">GET</span></td>
+          <td class="url-cell">/php/orcamentos.php?action=listar&uid=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, orcamentos[] }</td>
+        </tr>
+        <tr>
+          <td><span class="method get">GET</span></td>
+          <td class="url-cell">/php/orcamentos.php?action=buscar&id=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, orcamento }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/orcamentos.php?action=status&id=1</td>
+          <td style="color:var(--muted);font-size:12px">{ status: "concluido" }</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, mensagem }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/orcamentos.php?action=deletar&id=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, mensagem }</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="color:var(--dourado);margin:24px 0 12px">Propostas</h3>
+  <div class="code-block" style="overflow:auto">
+    <table class="routes-table">
+      <thead><tr><th>Método</th><th>URL</th><th>Body / Params</th><th>Retorno</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="method get">GET</span></td>
+          <td class="url-cell">/php/propostas.php?action=listar&orc_id=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, propostas[] }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/propostas.php?action=criar</td>
+          <td style="color:var(--muted);font-size:12px">{ orcamento_id, montador_id, valor, disponibilidade, horario, mensagem }</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, id }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/propostas.php?action=aceitar&id=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, mensagem }</td>
+        </tr>
+        <tr>
+          <td><span class="method post">POST</span></td>
+          <td class="url-cell">/php/propostas.php?action=recusar&id=1</td>
+          <td style="color:var(--muted);font-size:12px">—</td>
+          <td style="color:var(--muted);font-size:12px">{ sucesso, mensagem }</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── SEÇÃO 5: TESTES ── -->
+<section class="section">
+  <div class="section-label">Passo 04</div>
+  <h2>Testes Rápidos no Navegador</h2>
+  <p style="color:var(--muted);margin-bottom:20px">Abra o console do navegador (F12 → Console) e cole os comandos abaixo para testar cada endpoint:</p>
+
+  <h3 style="color:#fff;margin-bottom:12px;font-size:1rem">Testar cadastro</h3>
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-lang">JavaScript — Console do Navegador</span>
+      <button class="copy-btn" onclick="copiar(this)">Copiar</button>
+    </div>
+    <pre>fetch(<span class="str">'/click_montagem/api/usuarios.php?action=cadastrar'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+  body: JSON.stringify({
+    nome: <span class="str">'Teste Silva'</span>,
+    email: <span class="str">'teste@email.com'</span>,
+    telefone: <span class="str">'(11) 91234-5678'</span>,
+    senha: <span class="str">'minhasenha123'</span>,
+    tipo: <span class="str">'cliente'</span>
+  })
+}).then(r => r.json()).then(console.log);</pre>
+  </div>
+
+  <h3 style="color:#fff;margin:20px 0 12px;font-size:1rem">Testar login</h3>
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-lang">JavaScript — Console do Navegador</span>
+      <button class="copy-btn" onclick="copiar(this)">Copiar</button>
+    </div>
+    <pre>fetch(<span class="str">'/click_montagem/api/usuarios.php?action=login'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+  body: JSON.stringify({
+    email: <span class="str">'joao@clickmontagem.com'</span>,
+    senha: <span class="str">'senha123'</span>
+  })
+}).then(r => r.json()).then(console.log);</pre>
+  </div>
+
+  <h3 style="color:#fff;margin:20px 0 12px;font-size:1rem">Testar listar propostas</h3>
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-lang">JavaScript — Console do Navegador</span>
+      <button class="copy-btn" onclick="copiar(this)">Copiar</button>
+    </div>
+    <pre>fetch(<span class="str">'/click_montagem/api/propostas.php?action=listar&orc_id=1'</span>)
+  .then(r => r.json()).then(console.log);</pre>
+  </div>
+
+  <div class="alert info">
+    <span class="alert-icon">💡</span>
+    <div><strong>Você também pode testar direto na barra de endereço</strong> para rotas GET, por exemplo:<br>
+    <code style="color:#8ab4d4;font-family:'JetBrains Mono',monospace">http://localhost/click_montagem/api/propostas.php?action=listar&orc_id=1</code></div>
+  </div>
+</section>
+
+<!-- ── SEÇÃO 6: USUÁRIOS DE EXEMPLO ── -->
+<section class="section">
+  <div class="section-label">Dados de Exemplo</div>
+  <h2>Usuários Pré-cadastrados</h2>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h3>👤 João Silva — Cliente</h3>
+      <p>Email: <code>joao@clickmontagem.com</code></p>
+      <p>Senha: <code>senha123</code></p>
+      <p>ID: 1 | Tipo: cliente</p>
+    </div>
+    <div class="info-card">
+      <h3>🔧 Marcos Oliveira — Montador</h3>
+      <p>Email: <code>marcos@clickmontagem.com</code></p>
+      <p>Senha: <code>senha123</code></p>
+      <p>ID: 2 | Tipo: montador</p>
+    </div>
+    <div class="info-card">
+      <h3>🔧 Roberto Lima — Montador</h3>
+      <p>Email: <code>roberto@clickmontagem.com</code></p>
+      <p>Senha: <code>senha123</code></p>
+      <p>ID: 3 | Tipo: montador</p>
+    </div>
+    <div class="info-card">
+      <h3>🔧 Ana Santos — Montadora</h3>
+      <p>Email: <code>ana@clickmontagem.com</code></p>
+      <p>Senha: <code>senha123</code></p>
+      <p>ID: 4 | Tipo: montador</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SEÇÃO 7: ERROS COMUNS ── -->
+<section class="section">
+  <div class="section-label">Solução de Problemas</div>
+  <h2>Erros Comuns e Correções</h2>
+
+  <div class="err-list">
+    <div class="err-item">
+      <div class="err-titulo">❌ "No 'Access-Control-Allow-Origin' header"</div>
+      <p>Erro de CORS quando o JS tenta chamar o PHP.</p>
+      <p class="fix">✅ Solução: Certifique-se de que <code>conexao.php</code> está sendo incluído em todos os arquivos PHP (o header CORS está nele). E acesse sempre via <code>localhost</code>, nunca abrindo o HTML como arquivo local (file://).</p>
+    </div>
+    <div class="err-item">
+      <div class="err-titulo">❌ "Falha na conexão com o banco"</div>
+      <p>PHP não consegue conectar ao MySQL.</p>
+      <p class="fix">✅ Solução: Verifique se o MySQL está <strong>Started</strong> no XAMPP. Em <code>conexao.php</code>, DB_USER = <code>'root'</code> e DB_PASS = <code>''</code> (vazio) são os padrões do XAMPP. Se você definiu senha no MySQL, atualize DB_PASS.</p>
+    </div>
+    <div class="err-item">
+      <div class="err-titulo">❌ "Rota inválida 404"</div>
+      <p>O endpoint não foi reconhecido pelo PHP.</p>
+      <p class="fix">✅ Solução: Verifique a URL completa. O parâmetro <code>action=</code> deve existir e ter exatamente o valor esperado (ex: <code>cadastrar</code>, não <code>Cadastrar</code>). Use o console do navegador (F12) para ver a requisição real.</p>
+    </div>
+    <div class="err-item">
+      <div class="err-titulo">❌ "SyntaxError: Unexpected token < in JSON"</div>
+      <p>PHP retornou HTML (provavelmente uma página de erro) em vez de JSON.</p>
+      <p class="fix">✅ Solução: Abra a URL do PHP diretamente no navegador para ver o erro completo. Geralmente é um require_once com caminho errado ou erro de sintaxe PHP.</p>
+    </div>
+    <div class="err-item">
+      <div class="err-titulo">❌ Imagens/CSS não carregam</div>
+      <p>Caminhos relativos errados no HTML.</p>
+      <p class="fix">✅ Solução: Como os HTMLs ficam em <code>/html/</code>, use <code>../css/arquivo.css</code> para subir um nível. Nunca use caminhos absolutos como <code>C:\xampp\...</code>.</p>
+    </div>
+    <div class="err-item">
+      <div class="err-titulo">❌ "Este e-mail já está cadastrado"</div>
+      <p>Tentativa de cadastrar o mesmo e-mail duas vezes.</p>
+      <p class="fix">✅ Normal — o banco tem uma restrição UNIQUE no e-mail. Use um e-mail diferente ou delete o usuário no phpMyAdmin antes de recadastrar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SEÇÃO 8: CHECKLIST ── -->
+<section class="section">
+  <div class="section-label">Checklist Final</div>
+  <h2>Tudo Funcionando?</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">☐</div>
+      <div class="step-body">
+        <h3>Apache e MySQL verdes no XAMPP Control Panel</h3>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">☐</div>
+      <div class="step-body">
+        <h3>Banco <code>click_montagem</code> visível no phpMyAdmin com 3 tabelas</h3>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">☐</div>
+      <div class="step-body">
+        <h3>URL <code>http://localhost/click_montagem/html/login.html</code> abre a página</h3>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">☐</div>
+      <div class="step-body">
+        <h3>Login com <code>joao@clickmontagem.com</code> / <code>senha123</code> funciona</h3>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">☐</div>
+      <div class="step-body">
+        <h3>Teste de cadastro no console retorna <code>{ sucesso: true }</code></h3>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">☐</div>
+      <div class="step-body">
+        <h3>Propostas carregam dinamicamente na tela de propostas</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert ok" style="margin-top:28px">
+    <span class="alert-icon">🚀</span>
+    <div><strong>Pronto!</strong> Se todos os itens acima estão marcados, o sistema está 100% funcional no XAMPP.</div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<script>
+function copiar(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copiar';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+/* ============================================
+   ORCAMENTO.CSS — Click Montagem
+   ÍCONES DOURADOS + LOGO MAIOR + ESTIMATIVA DESTACADA
+   ============================================ */
+
+/* ── Página ────────────────────────────────── */
+.orcamento-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bege-fundo);
+}
+
+/* ── Container centralizado ────────────────── */
+.orcamento-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+}
+
+.orcamento-box {
+    width: 100%;
+}
+
+/* LOGO MAIOR */
+.nav-logo-img {
+    height: 64px;
+    width: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+/* ── Navbar ────────── */
+.nav-username {
+    color: var(--bege-claro);
+    font-size: 13px;
+}
+
+/* ── Títulos e breadcrumb ──────────────────── */
+.breadcrumb {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+.breadcrumb span {
+    color: var(--dourado);
+}
+.page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 28px;
+}
+.page-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--marrom-escuro);
+    margin: 0;
+}
+.page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+/* ── layout de duas colunas ───────────────── */
+.orcamento-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 24px;
+    align-items: start;
+}
+
+.orcamento-form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── cards ──────────────────── */
+.card {
+    background: var(--bege-claro);
+    border: 1px solid var(--bege-escuro);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--marrom-escuro);
+    margin-bottom: 16px;
+}
+
+/* ── toggle categoria ──────────────────────── */
+.tipo-movel-toggle {
+    display: flex;
+    gap: 8px;
+}
+.toggle-btn {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid var(--bege-escuro);
+    background: var(--branco);
+    color: var(--text-muted);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.toggle-btn:hover {
+    border-color: var(--dourado);
+    color: var(--dourado);
+}
+.toggle-btn.active {
+    background: var(--dourado);
+    border-color: var(--dourado);
+    color: var(--marrom-escuro);
+}
+
+/* ÍCONES DOURADOS nos toggles */
+.toggle-btn i {
+    font-size: 18px;
+    color: var(--dourado);
+    transition: color 0.2s;
+}
+.toggle-btn.active i {
+    color: var(--marrom-escuro);
+}
+
+/* ── grid de tipos ────────────────────────── */
+.tipo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+}
+.tipo-card {
+    cursor: pointer;
+    position: relative;
+}
+.tipo-card input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.tipo-card span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 10px;
+    border: 1.5px solid var(--bege-escuro);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--texto);
+    background: var(--branco);
+    transition: all 0.2s;
+    text-align: center;
+    min-height: 48px;
+}
+.tipo-card:hover span {
+    border-color: var(--dourado);
+}
+.tipo-card input:checked + span {
+    border-color: var(--dourado);
+    background: rgba(212, 163, 115, 0.1);
+    color: var(--marrom-escuro);
+}
+.tipo-card.hidden {
+    display: none;
+}
+
+/* ÍCONES DOURADOS nos cards de tipo */
+.tipo-card span i {
+    font-size: 16px;
+    color: var(--dourado);
+    transition: color 0.2s;
+}
+.tipo-card input:checked + span i {
+    color: var(--marrom-escuro);
+}
+
+/* ── campo outro ──────────────────────────── */
+#outroContainer {
+    margin-bottom: 14px;
+}
+
+/* ESTIMATIVA COM DESTAQUE */
+.preco-estimativa {
+    background: var(--marrom-escuro);
+    border: 1px solid var(--dourado);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.preco-label {
+    font-size: 11px;
+    color: var(--bege-claro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.preco-valor {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dourado);
+}
+
+/* ── foto upload ──────────────────────────── */
+.foto-upload {
+    border: 2px dashed var(--bege-escuro);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    background: var(--bege-fundo);
+    margin-top: 8px;
+}
+.foto-upload:hover {
+    border-color: var(--dourado);
+}
+.foto-icon {
+    font-size: 28px;
+    color: var(--dourado);
+    margin-bottom: 6px;
+}
+.foto-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--texto);
+    margin-bottom: 3px;
+}
+.foto-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* ── radios de horário ────────────────────── */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--bege-escuro);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.radio-item:hover {
+    border-color: var(--bark);
+}
+.radio-item.selected {
+    border-color: var(--dourado);
+    background: var(--oak-lighter);
+}
+.radio-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--bark);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.radio-item.selected .radio-dot {
+    border-color: var(--dourado);
+}
+.radio-dot-inner {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dourado);
+    display: none;
+}
+.radio-item.selected .radio-dot-inner {
+    display: block;
+}
+.radio-text {
+    font-size: 13px;
+    color: var(--texto);
+}
+
+/* ── sidebar (resumo) ─────────────────────── */
+.side-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--sand);
+}
+.summary-item:last-child {
+    border-bottom: none;
+}
+.summary-key {
+    color: var(--text-muted);
+}
+.summary-val {
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-align: right;
+}
+
+/* ESTIMATIVA DO RESUMO DESTACADA */
+.price-estimate {
+    background: var(--marrom-escuro);
+    border: 1px solid var(--dourado);
+    border-radius: 12px;
+    padding: 16px;
+}
+.price-estimate-label {
+    font-size: 11px;
+    color: var(--bege-claro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+.price-range {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--dourado);
+    margin-bottom: 4px;
+}
+.price-sub {
+    font-size: 11px;
+    color: var(--bege-claro);
+}
+
+.info-card {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+.info-title {
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+/* ── formulário ────────────────── */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+.full-width {
+    grid-column: 1 / -1;
+}
+.form-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px 13px;
+    border-radius: 8px;
+    border: 1px solid var(--bege-escuro);
+    background: var(--branco);
+    color: var(--texto);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--dourado);
+}
+.form-textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* ── botões ───────────────────────── */
+.nav-btns {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+}
+.btn {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-primary {
+    background: var(--dourado);
+    color: var(--marrom-escuro);
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-primary:hover {
+    background: #c49365;
+    transform: translateY(-1px);
+}
+.btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--bege-escuro);
+}
+.btn-ghost:hover {
+    border-color: var(--bark);
+    color: var(--texto);
+}
+.btn-lg {
+    padding: 13px 24px;
+    font-size: 14px;
+}
+
+/* ── rodapé ───────── */
+.footer {
+    background: var(--marrom-escuro);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 24px 28px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: auto;
+}
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.footer a {
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+}
+.footer a:hover {
+    color: var(--dourado);
+}
+.footer-separator {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── responsivo ───────────────────────────── */
+@media (max-width: 900px) {
+    .orcamento-layout {
+        grid-template-columns: 1fr;
+    }
+    .tipo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    .tipo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

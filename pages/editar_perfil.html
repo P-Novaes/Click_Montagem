@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil — Click Montagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/editar_perfil.css">
+</head>
+<body>
+
+<!-- ==================== NAVBAR PADRÃO ==================== -->
+<nav class="nav">
+    <div class="nav-left">
+        <img src="../assets/img/LogoClick.png" class="logo-img">
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="painel-cliente.html">Painel</a></li>
+        <li><a href="orcamento.html">Novo orçamento</a></li>
+        <li><a href="propostas.html">Propostas</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <div class="nav-avatar">JS</div>
+        <span class="nav-username">João Silva</span>
+        <button class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="painel-cliente.html">Painel</a>
+    <a href="orcamento.html">Novo orçamento</a>
+    <a href="propostas.html">Propostas</a>
+    <a href="editar_perfil.html">Editar perfil</a>
+</div>
+
+<!-- ==================== CONTEÚDO ==================== -->
+<main class="page">
+
+    <div class="breadcrumb">Painel › <span class="breadcrumb-active">Editar Perfil</span></div>
+
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Editar perfil</h1>
+            <p class="page-sub">Atualize suas informações pessoais e de segurança</p>
+        </div>
+    </div>
+
+    <form class="perfil-form" method="post" action="#" onsubmit="return false;" enctype="multipart/form-data">
+
+        <!-- Foto -->
+        <div class="foto-card">
+            <div class="foto-preview">
+                <i class="fas fa-user"></i>
+                <label class="foto-overlay" for="fotoInput">
+                    <i class="fas fa-camera"></i>
+                </label>
+            </div>
+            <input type="file" id="fotoInput" name="foto" accept="image/*">
+            <p class="foto-hint">Clique na foto para alterar</p>
+        </div>
+
+        <!-- Dados pessoais -->
+        <div class="form-card">
+            <h3>Dados Pessoais</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nome completo</label>
+                    <input type="text" name="nome" class="form-control" value="João Silva" placeholder="Seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" name="email" class="form-control" value="joao@email.com" placeholder="seu@email.com">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="tel" name="telefone" class="form-control" value="(11) 99999-9999" placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label>CPF</label>
+                    <input type="text" name="cpf" class="form-control" value="123.456.789-00" placeholder="000.000.000-00">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Cidade</label>
+                    <input type="text" name="cidade" class="form-control" value="São Paulo" placeholder="Sua cidade">
+                </div>
+                <div class="form-group">
+                    <label>CEP</label>
+                    <input type="text" name="cep" class="form-control" value="01001-000" placeholder="00000-000">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Endereço</label>
+                <input type="text" name="endereco" class="form-control" value="Rua Exemplo, 123" placeholder="Rua, número, complemento">
+            </div>
+        </div>
+
+        <!-- Segurança -->
+        <div class="form-card">
+            <h3>Segurança</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Senha atual</label>
+                    <div class="input-pw-wrap">
+                        <input type="password" name="senha_atual" class="form-control" placeholder="Sua senha atual" id="senhaAtual">
+                        <button type="button" class="toggle-pw" onclick="togglePw('senhaAtual', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nova senha</label>
+                    <div class="input-pw-wrap">
+                        <input type="password" name="nova_senha" class="form-control" placeholder="Mínimo 6 caracteres" id="novaSenha">
+                        <button type="button" class="toggle-pw" onclick="togglePw('novaSenha', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar nova senha</label>
+                    <div class="input-pw-wrap">
+                        <input type="password" name="confirmar_senha" class="form-control" placeholder="Repita a nova senha" id="confirmarSenha">
+                        <button type="button" class="toggle-pw" onclick="togglePw('confirmarSenha', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ações -->
+        <div class="form-actions">
+            <a href="painel-cliente.html" class="btn btn-ghost">Cancelar</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Salvar alterações
+            </button>
+        </div>
+
+    </form>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-links">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-sep">—</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-sep">—</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/editar_perfil.js"></script>
+<script src="../assets/js/script.js"></script>
+<script>
+function togglePw(id, btn) {
+    const inp = document.getElementById(id);
+    const ico = btn.querySelector('i');
+    if (inp.type === 'password') {
+        inp.type = 'text';
+        ico.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+        inp.type = 'password';
+        ico.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+}
+
+// Preview da foto antes de enviar
+document.getElementById('fotoInput').addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        const preview = document.querySelector('.foto-preview');
+        preview.style.backgroundImage = `url(${e.target.result})`;
+        preview.style.backgroundSize = 'cover';
+        preview.style.backgroundPosition = 'center';
+        preview.querySelector('i').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+});
+</script>
+
+</body>
+</html>

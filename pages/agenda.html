@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda — Click Montagem</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/agenda.css">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <img src="../assets/img/LogoClick.png" class="logo-img">
+    <span class="nav-tag">Montador</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="painel-montador.html">Painel</a></li>
+    <li><a href="painel-montador.html#solicitacoes">Solicitações</a></li>
+    <li><a href="agenda.html" class="active">Agenda</a></li>
+    <li><a href="painel-montador.html#ganhos">Ganhos</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="online-dot"></div>
+    <a href="editar-perfil-montador.html" class="nav-avatar" title="Editar perfil">MO</a>
+    <span class="nav-username">Marcos Oliveira</span>
+    <button class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="painel-montador.html">Painel</a>
+  <a href="painel-montador.html#solicitacoes">Solicitações</a>
+  <a href="agenda.html" class="active">Agenda</a>
+  <a href="painel-montador.html#ganhos">Ganhos</a>
+  <a href="editar-perfil-montador.html">Editar perfil</a>
+</div>
+
+<main class="page">
+
+  <div class="breadcrumb">Painel › <span class="breadcrumb-active">Agenda completa</span></div>
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Minha agenda</h1>
+      <p class="page-sub">Maio de 2026 · 8 agendamentos este mês</p>
+    </div>
+    <button class="btn btn-primary" onclick="adicionarDisponibilidade()">+ Adicionar disponibilidade</button>
+  </div>
+
+  <!-- Métricas -->
+  <div class="metric-grid">
+    <div class="metric-card fade-up-1">
+      <p class="metric-lbl">Esta semana</p>
+      <div class="metric-val"><span class="amount">3</span></div>
+      <p class="metric-sub clr-muted">agendamentos</p>
+    </div>
+    <div class="metric-card fade-up-2">
+      <p class="metric-lbl">Pendentes</p>
+      <div class="metric-val"><span class="amount">2</span></div>
+      <p class="metric-sub clr-warn">aguardando aceite</p>
+    </div>
+    <div class="metric-card fade-up-3">
+      <p class="metric-lbl">Concluídos</p>
+      <div class="metric-val"><span class="amount">14</span></div>
+      <p class="metric-sub clr-up">+3 vs. semana passada</p>
+    </div>
+    <div class="metric-card fade-up-4">
+      <p class="metric-lbl">Próximo</p>
+      <div class="metric-val"><span class="amount">Ter 5</span></div>
+      <p class="metric-sub clr-muted">09:00 · João Silva</p>
+    </div>
+  </div>
+
+  <div class="prop-layout">
+
+    <!-- COLUNA ESQUERDA -->
+    <div>
+
+      <!-- Calendário Maio 2026 -->
+      <div class="cal-card">
+        <div class="cal-header">
+          <span class="cal-month-title">Maio 2026</span>
+          <div class="cal-arrows">
+            <button class="cal-arrow">‹</button>
+            <button class="cal-arrow">›</button>
+          </div>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-dow">DOM</div>
+          <div class="cal-dow">SEG</div>
+          <div class="cal-dow">TER</div>
+          <div class="cal-dow">QUA</div>
+          <div class="cal-dow">QUI</div>
+          <div class="cal-dow">SEX</div>
+          <div class="cal-dow">SÁB</div>
+
+          <!-- Maio começa na quinta (1º = QUI) -->
+          <div class="cal-day empty"></div>
+          <div class="cal-day empty"></div>
+          <div class="cal-day empty"></div>
+          <div class="cal-day empty"></div>
+          <div class="cal-day past">1</div>
+          <div class="cal-day past">2</div>
+          <div class="cal-day past">3</div>
+
+          <!-- Semana 2 -->
+          <div class="cal-day past">4</div>
+          <div class="cal-day past has-ev">5</div>
+          <div class="cal-day past has-ev-g">6</div>
+          <div class="cal-day past">7</div>
+          <div class="cal-day past has-ev">8</div>
+          <div class="cal-day past">9</div>
+          <div class="cal-day past">10</div>
+
+          <!-- Semana 3 -->
+          <div class="cal-day past">11</div>
+          <div class="cal-day past has-ev-g">12</div>
+          <div class="cal-day past">13</div>
+          <div class="cal-day past">14</div>
+          <div class="cal-day past has-ev-g">15</div>
+          <div class="cal-day past">16</div>
+          <div class="cal-day past">17</div>
+
+          <!-- Semana 4 -->
+          <div class="cal-day past">18</div>
+          <div class="cal-day past has-ev">19</div>
+          <div class="cal-day past">20</div>
+          <div class="cal-day today has-ev">21</div>
+          <div class="cal-day selected has-ev">22</div>
+          <div class="cal-day has-ev">23</div>
+          <div class="cal-day has-ev-g">24</div>
+
+          <!-- Semana 5 -->
+          <div class="cal-day">25</div>
+          <div class="cal-day">26</div>
+          <div class="cal-day">27</div>
+          <div class="cal-day">28</div>
+          <div class="cal-day has-ev">29</div>
+          <div class="cal-day">30</div>
+          <div class="cal-day">31</div>
+        </div>
+        <div class="cal-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--dourado)"></div>Confirmado</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#27ae60"></div>Concluído</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--texto-claro)"></div>Pendente</div>
+        </div>
+      </div>
+
+      <!-- Semana atual -->
+      <div class="section-label">Semana de 18 a 24 de maio</div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name">DOM</div>
+          <div class="wday-num">18</div>
+        </div>
+        <div class="wevents">
+          <div class="wempty">Sem agendamentos</div>
+        </div>
+      </div>
+
+      <div class="section-label">hoje</div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name on">SEG</div>
+          <div class="wday-num on">21</div>
+        </div>
+        <div class="wevents">
+          <div class="wev active">
+            <div>
+              <div class="wev-title">Rack e TV — Pedro Costa</div>
+              <div class="wev-meta">Lapa, SP</div>
+            </div>
+            <div class="wev-right">
+              <div class="wev-time">10:00</div>
+              <div class="wev-price">
+                <span class="currency">R$</span><span class="amount">120</span>
+              </div>
+              <span class="tag tag-ok">Confirmado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name">TER</div>
+          <div class="wday-num">22</div>
+        </div>
+        <div class="wevents">
+          <div class="wev active">
+            <div>
+              <div class="wev-title">Guarda-roupa 6 portas — João Silva</div>
+              <div class="wev-meta">Consolação, SP</div>
+            </div>
+            <div class="wev-right">
+              <div class="wev-time">09:00</div>
+              <div class="wev-price">
+                <span class="currency">R$</span><span class="amount">180</span>
+              </div>
+              <span class="tag tag-ok">Confirmado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name">QUA</div>
+          <div class="wday-num">23</div>
+        </div>
+        <div class="wevents">
+          <div class="wev">
+            <div>
+              <div class="wev-title">Berço — Maria Fernanda</div>
+              <div class="wev-meta">Vila Mariana, SP</div>
+            </div>
+            <div class="wev-right">
+              <div class="wev-time">14:00</div>
+              <div class="wev-price">
+                <span class="currency">R$</span><span class="amount">90</span>
+              </div>
+              <span class="tag tag-pend">Pendente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name">QUI</div>
+          <div class="wday-num">24</div>
+        </div>
+        <div class="wevents">
+          <div class="wempty">Disponível</div>
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name">SEX</div>
+          <div class="wday-num">25</div>
+        </div>
+        <div class="wevents">
+          <div class="wempty">Disponível</div>
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name">SÁB</div>
+          <div class="wday-num">26</div>
+        </div>
+        <div class="wevents">
+          <div class="wempty">Disponível</div>
+        </div>
+      </div>
+
+      <div class="section-label">próxima semana</div>
+
+      <div class="week-row">
+        <div class="wday-col">
+          <div class="wday-name">TER</div>
+          <div class="wday-num">29</div>
+        </div>
+        <div class="wevents">
+          <div class="wev">
+            <div>
+              <div class="wev-title">Mesa de jantar — Renata Gomes</div>
+              <div class="wev-meta">Moema, SP</div>
+            </div>
+            <div class="wev-right">
+              <div class="wev-time">10:00</div>
+              <div class="wev-price">
+                <span class="currency">R$</span><span class="amount">150</span>
+              </div>
+              <span class="tag tag-ok">Confirmado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar-sticky">
+
+      <div class="card">
+        <p class="card-title">Filtrar por status</p>
+        <div class="filter-btns">
+          <button class="filter-btn active">Todos</button>
+          <button class="filter-btn">Confirmados</button>
+          <button class="filter-btn">Pendentes</button>
+          <button class="filter-btn">Concluídos</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Próximos agendamentos</p>
+
+        <div class="ev-mini today-bg">
+          <div class="ev-dc">
+            <div class="ev-d">21</div>
+            <div class="ev-m">MAI</div>
+          </div>
+          <div class="ev-info">
+            <div class="ev-n">Rack e TV</div>
+            <div class="ev-mt">Pedro Costa · 10:00</div>
+          </div>
+          <span class="tag tag-dourado">Hoje</span>
+        </div>
+
+        <div class="ev-mini">
+          <div class="ev-dc">
+            <div class="ev-d">22</div>
+            <div class="ev-m">MAI</div>
+          </div>
+          <div class="ev-info">
+            <div class="ev-n">Guarda-roupa</div>
+            <div class="ev-mt">João Silva · 09:00</div>
+          </div>
+          <span class="tag tag-ok">Confirmado</span>
+        </div>
+
+        <div class="ev-mini">
+          <div class="ev-dc">
+            <div class="ev-d">23</div>
+            <div class="ev-m">MAI</div>
+          </div>
+          <div class="ev-info">
+            <div class="ev-n">Berço</div>
+            <div class="ev-mt">Maria F. · 14:00</div>
+          </div>
+          <span class="tag tag-pend">Pendente</span>
+        </div>
+
+        <div class="ev-mini">
+          <div class="ev-dc">
+            <div class="ev-d">24</div>
+            <div class="ev-m">MAI</div>
+          </div>
+          <div class="ev-info">
+            <div class="ev-n">Cozinha</div>
+            <div class="ev-mt">Carlos M. · 08:00</div>
+          </div>
+          <span class="tag tag-ok">Confirmado</span>
+        </div>
+
+        <div class="ev-mini">
+          <div class="ev-dc">
+            <div class="ev-d">29</div>
+            <div class="ev-m">MAI</div>
+          </div>
+          <div class="ev-info">
+            <div class="ev-n">Mesa de jantar</div>
+            <div class="ev-mt">Renata G. · 10:00</div>
+          </div>
+          <span class="tag tag-ok">Confirmado</span>
+        </div>
+      </div>
+
+      <div class="earn-box">
+        <div class="earn-header">
+          <div class="earn-icon">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M5 1.5v3.2l2 1.3" stroke="var(--dourado)" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span>Ganhos previstos</span>
+        </div>
+        <div class="earn-val">
+          <span class="currency">R$</span><span class="amount">860</span>
+        </div>
+        <p class="earn-sub">nos próximos agendamentos</p>
+        <a href="painel-montador.html#ganhos">
+          <button class="btn btn-ghost btn-full" style="font-size:12px;">Ver relatório ↗</button>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <span>© 2026 Click Montagem</span>
+    <span class="footer-sep">—</span>
+    <a href="termos.html">Termos</a>
+    <span class="footer-sep">—</span>
+    <a href="privacidade.html">Privacidade</a>
+  </div>
+</footer>
+
+<!-- Toast de disponibilidade -->
+<div id="toastDisp" style="display:none;position:fixed;bottom:30px;right:30px;background:var(--marrom-escuro);color:#fff;padding:14px 22px;border-radius:10px;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:200;animation:fadeUp 0.3s ease;">
+  <i class="fas fa-check-circle" style="color:var(--dourado);margin-right:8px;"></i>
+  <span id="toastDispText">Disponibilidade adicionada!</span>
+</div>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/agenda.js"></script>
+<script>
+function adicionarDisponibilidade() {
+  const toast = document.getElementById('toastDisp');
+  const txt = document.getElementById('toastDispText');
+  txt.textContent = 'Novo horário disponível adicionado com sucesso!';
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 2500);
+}
+</script>
+
+</body>
+</html>

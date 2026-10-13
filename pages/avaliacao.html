@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avaliar Serviço — Click Montagem</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/avaliacao.css">
+</head>
+<body>
+
+<!-- ✅ NAV COMPLETA DO CLIENTE (corrigida) -->
+<nav class="nav">
+  <div class="nav-left">
+    <img src="../assets/img/LogoClick.png" class="logo-img" alt="Click Montagem">
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="painel-cliente.html">Painel</a></li>
+    <li><a href="orcamento.html">Novo orçamento</a></li>
+    <li><a href="propostas.html">Propostas</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="editar_perfil.html" class="nav-avatar" title="Editar perfil">JS</a>
+    <span class="nav-username">João Silva</span>
+    <button class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="painel-cliente.html">Painel</a>
+  <a href="orcamento.html">Novo orçamento</a>
+  <a href="propostas.html">Propostas</a>
+  <a href="editar_perfil.html">Editar perfil</a>
+</div>
+
+<main class="page">
+
+  <div class="breadcrumb">Painel › <span class="breadcrumb-active">Avaliar serviço</span></div>
+
+  <div class="page-header">
+    <h1 class="page-title">Sua avaliação</h1>
+    <p class="page-sub">Compartilhe sua experiência com a comunidade</p>
+  </div>
+
+  <!-- Card do serviço -->
+  <div class="service-card" id="serviceCard">
+    <div class="avatar av-md">MO</div>
+    <div class="service-info">
+      <p class="service-name">Guarda-roupa 6 portas</p>
+      <p class="service-meta">Marcos Oliveira · 18 de maio de 2026 · R$ 180</p>
+    </div>
+    <span class="tag tag-done">Concluído</span>
+  </div>
+
+  <!-- Card de avaliação -->
+  <div class="rating-card" id="formSection">
+    <p class="rating-title">Como foi o serviço?</p>
+    <p class="rating-sub">Sua avaliação ajuda outros clientes a escolherem bem</p>
+
+    <div class="star-row" id="mainStars">
+      <button class="star-btn" data-v="1">★</button>
+      <button class="star-btn" data-v="2">★</button>
+      <button class="star-btn" data-v="3">★</button>
+      <button class="star-btn" data-v="4">★</button>
+      <button class="star-btn" data-v="5">★</button>
+    </div>
+    <div class="star-label" id="starLabel">Toque para avaliar</div>
+
+    <div class="criteria-grid">
+      <div class="crit-item">
+        <div class="crit-label">Pontualidade</div>
+        <div class="crit-stars" data-crit="pont">
+          <button class="crit-star on" data-v="1">★</button>
+          <button class="crit-star on" data-v="2">★</button>
+          <button class="crit-star on" data-v="3">★</button>
+          <button class="crit-star on" data-v="4">★</button>
+          <button class="crit-star on" data-v="5">★</button>
+        </div>
+      </div>
+      <div class="crit-item">
+        <div class="crit-label">Qualidade</div>
+        <div class="crit-stars" data-crit="qual">
+          <button class="crit-star on" data-v="1">★</button>
+          <button class="crit-star on" data-v="2">★</button>
+          <button class="crit-star on" data-v="3">★</button>
+          <button class="crit-star on" data-v="4">★</button>
+          <button class="crit-star on" data-v="5">★</button>
+        </div>
+      </div>
+      <div class="crit-item">
+        <div class="crit-label">Comunicação</div>
+        <div class="crit-stars" data-crit="com">
+          <button class="crit-star on" data-v="1">★</button>
+          <button class="crit-star on" data-v="2">★</button>
+          <button class="crit-star on" data-v="3">★</button>
+          <button class="crit-star on" data-v="4">★</button>
+          <button class="crit-star on" data-v="5">★</button>
+        </div>
+      </div>
+      <div class="crit-item">
+        <div class="crit-label">Limpeza</div>
+        <div class="crit-stars" data-crit="limp">
+          <button class="crit-star on" data-v="1">★</button>
+          <button class="crit-star on" data-v="2">★</button>
+          <button class="crit-star on" data-v="3">★</button>
+          <button class="crit-star on" data-v="4">★</button>
+          <button class="crit-star on" data-v="5">★</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Comentário (opcional)</label>
+      <textarea class="form-textarea" placeholder="Conte como foi a experiência. Sua avaliação ajuda outros clientes..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Você recomendaria este montador?</label>
+      <div class="recom-btns">
+        <button class="btn btn-secondary" id="yesBtn" onclick="setRecom(true)">Sim, recomendo</button>
+        <button class="btn btn-ghost" id="noBtn" onclick="setRecom(false)">Não recomendo</button>
+      </div>
+    </div>
+
+    <div class="action-btns">
+      <a href="painel-cliente.html"><button class="btn btn-ghost">Avaliar depois</button></a>
+      <button class="btn btn-primary" onclick="submitReview()">Enviar avaliação</button>
+    </div>
+  </div>
+
+  <!-- Sucesso -->
+  <div class="success-card" id="successCard" style="display:none;">
+    <div class="success-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M5 14l6 7L23 8" stroke="#3A6A2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <p class="success-title">Avaliação enviada!</p>
+    <p class="success-sub">Obrigado por compartilhar sua experiência. Isso ajuda toda a comunidade.</p>
+    <a href="painel-cliente.html"><button class="btn btn-primary btn-lg">Voltar ao painel</button></a>
+  </div>
+
+</main>
+
+<!-- ✅ FOOTER CORRIGIDO -->
+<footer class="footer">
+  <div class="footer-links">
+    <span>© 2026 Click Montagem</span>
+    <span class="footer-sep">—</span>
+    <a href="termos.html">Termos</a>
+    <span class="footer-sep">—</span>
+    <a href="privacidade.html">Privacidade</a>
+  </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/avaliacao.js"></script>
+</body>
+</html>

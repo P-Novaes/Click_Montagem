@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha - Click Montagem</title>
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../assets/css/recuperar_senha.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body class="login-page">
+
+    <!-- ==================== NAVBAR MÍNIMA ==================== -->
+    <nav class="nav nav-login">
+        <a href="../index.html" class="nav-logo">
+            <img src="../assets/img/LogoClick.png" alt="Click Montagem" class="nav-logo-img">
+        </a>
+    </nav>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <div class="login-wrapper">
+        <div class="recuperar-form-container">
+            <div class="recuperar-box">
+                <!-- Formulário -->
+                <div id="formSection">
+                    <h1><i class="fas fa-tools"></i> Recuperar Senha</h1>
+                    <p class="subtitle">Digite o e-mail associado à sua conta. Você receberá um link para criar uma nova
+                        senha.</p>
+
+                    <div class="msg-erro" id="msgErro">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="erroTexto">E-mail não encontrado.</span>
+                    </div>
+
+                    <form class="recuperar-form" id="recuperarForm">
+                        <div class="form-group">
+                            <label for="email">E-mail cadastrado</label>
+                            <div class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" placeholder="seu@email.com" required
+                                    autofocus>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="btnEnviar">
+                            <i class="fas fa-paper-plane"></i> Enviar Link de Recuperação
+                        </button>
+                    </form>
+
+                    <div class="recuperar-links">
+                        <p>Lembrou sua senha? <a href="login.html">Fazer login</a></p>
+                    </div>
+                </div>
+
+                <!-- Estado de Sucesso -->
+                <div class="recuperar-sucesso" id="sucessoSection">
+                    <div class="icone-sucesso">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2>E-mail enviado!</h2>
+                    <p>Enviamos um link de recuperação para<br>
+                        <span class="email-destaque" id="emailEnviado">usuario@email.com</span>
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--cinza-claro); margin-top: 1rem;">
+                        Não recebeu? Verifique sua caixa de spam ou <a href="#" id="reenviarLink"
+                            style="color: var(--dourado);">tentar novamente</a>.
+                    </p>
+                    <a href="login.html" class="btn btn-outline" style="margin-top: 1.5rem;">
+                        <i class="fas fa-arrow-left"></i> Voltar para o Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== RODAPÉ ==================== -->
+    <footer class="login-footer">
+    <div class="footer-content">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-separator">–</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-separator">–</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/recuperar_senha.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Montagem — Monte com confiança</title>
+    <meta name="description"
+        content="Encontre montadores qualificados, faça orçamentos e agende serviços de forma rápida e segura.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/shared.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+
+</head>
+
+<body>
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="nav">   
+        <a href="index.html" class="nav-logo">
+            <img src="assets/img/LogoClick.png" alt="Click Montagem" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Início</a></li>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#montadores">Montadores</a></li>
+            <li><a href="#depoimentos">Avaliações</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="pages/login.html"><button class="btn btn-ghost">Entrar</button></a>
+            <a href="pages/login.html"><button class="btn btn-primary">Cadastrar</button></a>
+            <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="active">Início</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#montadores">Montadores</a>
+        <a href="#depoimentos">Avaliações</a>
+        <a href="pages/login.html">Entrar</a>
+        <a href="pages/login.html">Cadastrar</a>
+    </div>
+
+    <!-- HERO com calculadora integrada -->
+    <section class="hero">
+        <div class="hero-inner">
+
+            <!-- LADO ESQUERDO: textos e stats -->
+            <div class="hero-left">
+                <img src="assets/img/LogoClick.png" alt="Click Montagem" class="hero-logo-img">
+                <h1>Monte com <em>cuidado</em>,<br>agende com confiança</h1>
+                <p class="hero-desc">Conectamos você aos melhores montadores da sua região. Orçamento transparente,
+                    agendamento simples e avaliações reais.</p>
+                <div class="hero-actions">
+                    <a href="pages/login.html" class="btn btn-primary btn-lg">Solicitar orçamento ↗</a>
+                    <a href="pages/login.html" class="btn btn-outline btn-lg">Sou montador</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <strong>2.4k+</strong>
+                        <span>Montadores</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>18k+</strong>
+                        <span>Serviços</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>4.9 ★</strong>
+                        <span>Nota média</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LADO DIREITO: calculadora -->
+            <div class="hero-calc">
+                <div class="calc-card">
+                    <div class="calc-card-header">
+                        <h3>Calcule seu orçamento</h3>
+                        <p>Estimativa gratuita em segundos</p>
+                    </div>
+                    <form method="get" action="pages/orcamento.html">
+
+                        <!-- NOVO: Escolha entre Planejado ou Padrão -->
+                        <div class="form-group">
+                            <label class="form-label">Tipo de móvel</label>
+                            <div class="tipo-movel-toggle">
+                                <button type="button" class="toggle-btn active" data-tipo="planejado" onclick="selecionarTipo(this)">
+                                    <i class="fas fa-drafting-compass"></i> Planejados
+                                </button>
+                                <button type="button" class="toggle-btn" data-tipo="padrao" onclick="selecionarTipo(this)">
+                                    <i class="fas fa-box"></i> Padrões
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- NOVO: Lista de tipos (dropdown customizado com ícones) -->
+                        <div class="form-group">
+                            <label class="form-label">Qual móvel?</label>
+                            <div class="custom-select" id="customSelect">
+                                <div class="custom-select-trigger" id="customSelectTrigger">
+                                    <span class="selected-icon"><i class="fas fa-door-open"></i></span>
+                                    <span class="selected-text">Guarda-roupa</span>
+                                    <i class="fas fa-chevron-down arrow"></i>
+                                </div>
+                                <ul class="custom-options" id="customOptions" style="display: none;">
+                                    <!-- Planejados -->
+                                    <li class="optgroup-label" data-grupo="planejado">Planejados</li>
+                                    <li data-value="guarda-roupa-plan" data-preco="300-500" data-grupo="planejado">
+                                        <i class="fas fa-door-open"></i> Guarda-roupa
+                                    </li>
+                                    <li data-value="cozinha-plan" data-preco="800-1200" data-grupo="planejado">
+                                        <i class="fas fa-utensils"></i> Cozinha
+                                    </li>
+                                    <li data-value="closet-plan" data-preco="400-700" data-grupo="planejado">
+                                        <i class="fas fa-tshirt"></i> Closet / Walk-in
+                                    </li>
+                                    <li data-value="estante-plan" data-preco="250-400" data-grupo="planejado">
+                                        <i class="fas fa-book"></i> Estante
+                                    </li>
+                                    <li data-value="homeoffice-plan" data-preco="350-600" data-grupo="planejado">
+                                        <i class="fas fa-briefcase"></i> Home office
+                                    </li>
+                                    <li data-value="banheiro-plan" data-preco="300-500" data-grupo="planejado">
+                                        <i class="fas fa-shower"></i> Banheiro
+                                    </li>
+                                    <li data-value="lavanderia-plan" data-preco="200-350" data-grupo="planejado">
+                                        <i class="fas fa-soap"></i> Lavanderia
+                                    </li>
+                                    <li data-value="area-servico-plan" data-preco="150-300" data-grupo="planejado">
+                                        <i class="fas fa-broom"></i> Área de serviço
+                                    </li>
+                                    <li data-value="varanda-plan" data-preco="250-450" data-grupo="planejado">
+                                        <i class="fas fa-leaf"></i> Varanda / Terraço
+                                    </li>
+                                    <li data-value="outro-plan" data-preco="0" data-grupo="planejado">
+                                        <i class="fas fa-pencil-alt"></i> Outro (especificar)
+                                    </li>
+                                    <!-- Padrões (inicialmente escondidos) -->
+                                    <li class="optgroup-label" data-grupo="padrao" style="display: none;">Padrões</li>
+                                    <li data-value="guarda-roupa-pad" data-preco="80-150" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-door-open"></i> Guarda-roupa
+                                    </li>
+                                    <li data-value="cozinha-pad" data-preco="200-400" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-utensils"></i> Cozinha
+                                    </li>
+                                    <li data-value="sofa-pad" data-preco="100-200" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-couch"></i> Sofá / Estofado
+                                    </li>
+                                    <li data-value="rack-pad" data-preco="80-150" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-tv"></i> Rack / TV
+                                    </li>
+                                    <li data-value="cama-pad" data-preco="100-180" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-bed"></i> Cama (box, beliche)
+                                    </li>
+                                    <li data-value="berco-pad" data-preco="80-120" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-baby-carriage"></i> Berço
+                                    </li>
+                                    <li data-value="mesa-pad" data-preco="100-180" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-chair"></i> Mesa e cadeiras
+                                    </li>
+                                    <li data-value="estante-pad" data-preco="80-130" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-book"></i> Estante / Livreiro
+                                    </li>
+                                    <li data-value="escrivaninha-pad" data-preco="80-120" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-desktop"></i> Escrivaninha
+                                    </li>
+                                    <li data-value="comoda-pad" data-preco="60-100" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-archive"></i> Cômoda / Criado-mudo
+                                    </li>
+                                    <li data-value="painel-pad" data-preco="80-150" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-tv"></i> Painel / TV suspenso
+                                    </li>
+                                    <li data-value="banheiro-pad" data-preco="80-150" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-toilet"></i> Banheiro (gabinete)
+                                    </li>
+                                    <li data-value="area-servico-pad" data-preco="60-100" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-broom"></i> Área de serviço
+                                    </li>
+                                    <li data-value="varanda-pad" data-preco="80-150" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-leaf"></i> Varanda
+                                    </li>
+                                    <li data-value="outro-pad" data-preco="0" data-grupo="padrao" style="display: none;">
+                                        <i class="fas fa-pencil-alt"></i> Outro (especificar)
+                                    </li>
+                                </ul>
+                                <!-- Campo oculto para enviar o valor selecionado no formulário -->
+                                <input type="hidden" name="tipoMovel" id="tipoMovelHidden" value="guarda-roupa-plan" data-preco="300-500">
+                            </div>
+                        </div>
+
+                        <!-- NOVO: Campo "Outro" (aparece só quando seleciona) -->
+                        <div class="form-group" id="outroContainer" style="display: none;">
+                            <label for="outroTexto" class="form-label">Especifique o móvel</label>
+                            <input type="text" id="outroTexto" class="form-input" placeholder="Descreva o móvel que precisa montar...">
+                        </div>
+
+                        <!-- NOVO: Estimativa de preço (atualiza dinamicamente) -->
+                        <div class="form-group">
+                            <div class="preco-estimativa">
+                                <span class="preco-label">Estimativa:</span>
+                                <span class="preco-valor" id="precoValor">R$ 300 – 500</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qtdPecas" class="form-label">Quantidade de peças</label>
+                            <select id="qtdPecas" class="form-select">
+                                <option>1 peça</option>
+                                <option>2 peças</option>
+                                <option>3 peças</option>
+                                <option>4 a 6 peças</option>
+                                <option>7 ou mais</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cep" class="form-label">Seu CEP</label>
+                            <input type="text" id="cep" class="form-input" placeholder="00000-000">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full btn-lg">Ver orçamento estimado ↗</button>
+                    </form>
+                    <div class="trust-line">
+                        <i class="fas fa-check-circle"></i>
+                        Pagamento liberado após conclusão do serviço
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="como-funciona" id="como-funciona">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow-line"></span>Como funciona<span
+                    class="eyebrow-line"></span></div>
+            <h2 class="section-title">Simples como montar um móvel</h2>
+            <p class="section-sub">Em poucos passos você conecta ao montador ideal para o seu serviço.</p>
+            <div class="steps-grid">
+                <div class="step-card fade-up-1">
+                    <div class="step-number">01</div>
+                    <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h4>Solicite</h4>
+                    <p>Descreva o serviço, local e horário preferido.</p>
+                </div>
+                <div class="step-card fade-up-2">
+                    <div class="step-number">02</div>
+                    <div class="step-icon"><i class="fas fa-search"></i></div>
+                    <h4>Compare</h4>
+                    <p>Receba propostas com preços e avaliações.</p>
+                </div>
+                <div class="step-card fade-up-3">
+                    <div class="step-number">03</div>
+                    <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h4>Agende</h4>
+                    <p>Escolha o montador e confirme a data.</p>
+                </div>
+                <div class="step-card fade-up-4">
+                    <div class="step-number">04</div>
+                    <div class="step-icon"><i class="fas fa-star"></i></div>
+                    <h4>Avalie</h4>
+                    <p>Compartilhe sua experiência com a comunidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MONTADORES EM DESTAQUE -->
+    <section class="montadores-destaque" id="montadores">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow-line"></span>Montadores em destaque<span
+                    class="eyebrow-line"></span></div>
+            <h2 class="section-title">Profissionais verificados</h2>
+            <p class="section-sub">Todos os montadores passam por verificação de identidade e histórico.</p>
+            <div class="montadores-grid">
+                <div class="montador-card">
+                    <div class="avatar montador-avatar av-amber av-xl">MO</div>
+                    <h4>Marcos Oliveira</h4>
+                    <p class="especialidade">Especialista em planejados</p>
+                    <div class="avaliacao">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>4.9 (234 serviços)</span>
+                    </div>
+                    <a href="pages/perfil-montador.html" class="btn btn-ghost btn-full">Ver perfil</a>
+                </div>
+                <div class="montador-card">
+                    <div class="avatar montador-avatar av-clay av-xl">RL</div>
+                    <h4>Roberto Lima</h4>
+                    <p class="especialidade">Montagem residencial</p>
+                    <div class="avaliacao">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span>4.7 (89 serviços)</span>
+                    </div>
+                    <a href="pages/perfil-montador.html" class="btn btn-ghost btn-full">Ver perfil</a>
+                </div>
+                <div class="montador-card">
+                    <div class="avatar montador-avatar av-warm av-xl">AS</div>
+                    <h4>Ana Santos</h4>
+                    <p class="especialidade">Berços e quarto infantil</p>
+                    <div class="avaliacao">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>5.0 (57 serviços)</span>
+                    </div>
+                    <a href="pages/perfil-montador.html" class="btn btn-ghost btn-full">Ver perfil</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="depoimentos" id="depoimentos">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow-line"></span>Avaliações<span class="eyebrow-line"></span>
+            </div>
+            <h2 class="section-title">O que dizem nossos clientes</h2>
+            <p class="section-sub">Mais de 18 mil serviços realizados com sucesso.</p>
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <p class="depoimento-texto">"Consegui um montador em menos de 1 hora. O guarda-roupa ficou perfeito
+                        e o preço foi justo. Recomendo!"</p>
+                    <div class="depoimento-autor">
+                        <div class="avatar av-amber av-sm">CA</div>
+                        <div><strong>Camila Alves</strong><span>São Paulo, SP</span></div>
+                    </div>
+                </div>
+                <div class="depoimento-card">
+                    <p class="depoimento-texto">"Transparência total nos preços, sem surpresas. O montador chegou no
+                        horário e foi muito profissional."</p>
+                    <div class="depoimento-autor">
+                        <div class="avatar av-clay av-sm">FM</div>
+                        <div><strong>Felipe Martins</strong><span>Guarulhos, SP</span></div>
+                    </div>
+                </div>
+                <div class="depoimento-card">
+                    <p class="depoimento-texto">"A cozinha planejada ficou incrível. Sistema de avaliações me deu
+                        segurança na escolha do profissional."</p>
+                    <div class="depoimento-autor">
+                        <div class="avatar av-warm av-sm">LR</div>
+                        <div><strong>Luana Rodrigues</strong><span>Santo André, SP</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-simple">
+    <p>© 2026 Click Montagem · <a href="pages/termos.html">Termos de uso</a> · <a href="pages/privacidade.html">Privacidade</a> · <a href="#">Contato</a></p>
+</footer>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
