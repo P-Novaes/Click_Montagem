@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil — Montador — Click Montagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/editar_perfil.css">
+    <style>
+        /* Pequenos complementos específicos do montador */
+        .especialidades-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .esp-tag {
+            background: var(--bege-fundo);
+            border: 1px solid var(--borda);
+            color: var(--texto-claro);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .esp-tag.ativo {
+            background: var(--dourado);
+            border-color: var(--dourado);
+            color: #fff;
+        }
+        .area-atendimento {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR MONTADOR ==================== -->
+<nav class="nav">
+    <div class="nav-left">
+        <img src="../assets/img/LogoClick.png" class="logo-img" alt="Click Montagem">
+        <span class="nav-tag">Montador</span>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="painel-montador.html">Painel</a></li>
+        <li><a href="painel-montador.html#solicitacoes">Solicitações</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="painel-montador.html#ganhos">Ganhos</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <div class="online-dot"></div>
+        <a href="editar-perfil-montador.html" class="nav-avatar" title="Editar perfil">—</a>
+        <span class="nav-username">Carregando...</span>
+        <button class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="painel-montador.html">Painel</a>
+    <a href="painel-montador.html#solicitacoes">Solicitações</a>
+    <a href="agenda.html">Agenda</a>
+    <a href="painel-montador.html#ganhos">Ganhos</a>
+    <a href="editar-perfil-montador.html" class="active">Editar perfil</a>
+</div>
+
+<!-- ==================== CONTEÚDO ==================== -->
+<main class="page">
+
+    <div class="breadcrumb">Painel › <span class="breadcrumb-active">Editar Perfil</span></div>
+
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Editar perfil</h1>
+            <p class="page-sub">Atualize suas informações profissionais e pessoais</p>
+        </div>
+    </div>
+
+    <form class="perfil-form" method="post" action="#" onsubmit="salvarPerfil(event)" enctype="multipart/form-data">
+
+        <!-- Foto -->
+        <div class="foto-card">
+            <div class="foto-preview" id="fotoPreview">
+                <i class="fas fa-user"></i>
+                <label class="foto-overlay" for="fotoInput">
+                    <i class="fas fa-camera"></i>
+                </label>
+            </div>
+            <input type="file" id="fotoInput" name="foto" accept="image/*" onchange="previewFoto(event)">
+            <p class="foto-hint">Clique na foto para alterar</p>
+        </div>
+
+        <!-- Dados pessoais -->
+        <div class="form-card">
+            <h3>Dados Pessoais</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nome completo</label>
+                    <input type="text" name="nome" class="form-control" value="" placeholder="Seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" name="email" class="form-control" value="" placeholder="seu@email.com">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="tel" name="telefone" class="form-control" value="" placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label>Cidade</label>
+                    <input type="text" name="cidade" class="form-control" value="" placeholder="Sua cidade">
+                </div>
+            </div>
+        </div>
+
+        <!-- Dados profissionais -->
+        <div class="form-card">
+            <h3>Dados Profissionais</h3>
+            <div class="form-group">
+                <label>Preço base por serviço (R$)</label>
+                <input type="number" name="preco_base" class="form-control" value="100" min="0" step="10">
+            </div>
+            <div class="form-group">
+                <label>Área de atendimento</label>
+                <input type="text" name="area_atuacao" class="form-control" value="" placeholder="Ex: Zona Sul de SP, Grande ABC...">
+            </div>
+            <div class="form-group">
+                <label>Especialidades</label>
+                <div class="especialidades-grid" id="especialidades">
+                    <span class="esp-tag" data-val="guarda-roupas">Guarda-roupas</span>
+                    <span class="esp-tag" data-val="cozinhas">Cozinhas planejadas</span>
+                    <span class="esp-tag" data-val="dormitorios">Dormitórios</span>
+                    <span class="esp-tag" data-val="racks">Racks / Home theaters</span>
+                    <span class="esp-tag" data-val="escritorios">Escritórios</span>
+                    <span class="esp-tag" data-val="bercos">Berços e infantil</span>
+                    <span class="esp-tag" data-val="moveis-padrao">Móveis padrão</span>
+                    <span class="esp-tag" data-val="moveis-externos">Móveis externos</span>
+                </div>
+                <p class="foto-hint" style="margin-top: 8px;">Clique para selecionar/remover</p>
+            </div>
+            <div class="form-group">
+                <label>Descrição (perfil público)</label>
+                <textarea name="descricao" class="form-control" style="min-height: 100px;" placeholder="Descreva sua experiência, diferenciais..."></textarea>
+            </div>
+        </div>
+
+        <!-- Segurança (opcional) -->
+        <div class="form-card">
+            <h3>Segurança</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Senha atual (deixe em branco para não alterar)</label>
+                    <div class="input-pw-wrap">
+                        <input type="password" name="senha_atual" class="form-control" placeholder="Sua senha atual" id="senhaAtual">
+                        <button type="button" class="toggle-pw" onclick="togglePw('senhaAtual', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nova senha</label>
+                    <div class="input-pw-wrap">
+                        <input type="password" name="nova_senha" class="form-control" placeholder="Mínimo 6 caracteres" id="novaSenha">
+                        <button type="button" class="toggle-pw" onclick="togglePw('novaSenha', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar nova senha</label>
+                    <div class="input-pw-wrap">
+                        <input type="password" name="confirmar_senha" class="form-control" placeholder="Repita a nova senha" id="confirmarSenha">
+                        <button type="button" class="toggle-pw" onclick="togglePw('confirmarSenha', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ações -->
+        <div class="form-actions">
+            <a href="painel-montador.html" class="btn btn-ghost">Cancelar</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Salvar alterações
+            </button>
+        </div>
+
+    </form>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-links">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-sep">—</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-sep">—</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/editar-perfil-montador.js"></script>
+<script src="../assets/js/script.js"></script>
+<script>
+    // Toggle senha
+    function togglePw(id, btn) {
+        const inp = document.getElementById(id);
+        const ico = btn.querySelector('i');
+        if (inp.type === 'password') {
+            inp.type = 'text';
+            ico.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            inp.type = 'password';
+            ico.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+
+    // Preview da foto
+    function previewFoto(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+            const preview = document.getElementById('fotoPreview');
+            preview.style.backgroundImage = `url(${e.target.result})`;
+            preview.style.backgroundSize = 'cover';
+            preview.style.backgroundPosition = 'center';
+            preview.querySelector('i').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Toggle especialidades
+    document.querySelectorAll('.esp-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+            tag.classList.toggle('ativo');
+        });
+    });
+</script>
+
+</body>
+</html>

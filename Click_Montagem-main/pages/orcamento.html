@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Orçamento — Click Montagem</title>
+    <meta name="description" content="Solicite um orçamento para montagem de móveis.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/orcamento.css">
+
+
+</head>
+
+<body class="orcamento-page">
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="nav">
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo">
+                <img src="../assets/img/LogoClick.png" alt="Click Montagem" class="nav-logo-img">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="painel-cliente.html">Painel</a></li>
+            <li><a href="orcamento.html" class="active">Novo orçamento</a></li>
+            <li><a href="propostas.html">Propostas</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="editar_perfil.html" class="nav-avatar" title="Editar perfil">—</a>
+            <span class="nav-username">Carregando...</span>
+            <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="painel-cliente.html">Painel</a>
+        <a href="orcamento.html" class="active">Novo orçamento</a>
+        <a href="propostas.html">Propostas</a>
+        <a href="editar_perfil.html">Editar perfil</a>
+    </div>
+
+    <!-- ==================== CONTEÚDO ==================== -->
+    <div class="login-wrapper">
+        <div class="orcamento-container">
+            <div class="orcamento-box">
+
+                <!-- Breadcrumb e Cabeçalho -->
+                <div class="breadcrumb">Painel › <span>Solicitar orçamento</span></div>
+                <div class="page-header">
+                    <h1 class="page-title">Novo orçamento</h1>
+                    <p class="page-sub">Preencha as informações para receber propostas de montadores</p>
+                </div>
+
+                <!-- Layout de duas colunas -->
+                <div class="orcamento-layout">
+                    <!-- Coluna esquerda: formulário -->
+                    <div class="orcamento-form-col">
+                        <!-- ✅ Formulário sem action/method, pois o envio é feito pelo link -->
+                        <form id="orcamentoForm">
+
+                            <!-- Card 1: Categoria -->
+                            <div class="card">
+                                <p class="card-title">Categoria</p>
+                                <div class="tipo-movel-toggle">
+                                    <button type="button" class="toggle-btn active" data-tipo="planejado" onclick="selecionarTipoOrcamento(this)">
+                                        <i class="fas fa-drafting-compass"></i> Planejados
+                                    </button>
+                                    <button type="button" class="toggle-btn" data-tipo="padrao" onclick="selecionarTipoOrcamento(this)">
+                                        <i class="fas fa-box"></i> Padrões
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Tipo de móvel -->
+                            <div class="card">
+                                <p class="card-title">Tipo de móvel</p>
+                                <div class="tipo-grid" id="tipoGrid">
+                                    <!-- Planejados -->
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="guarda-roupa-plan" data-preco="300-500" checked>
+                                        <span><i class="fas fa-door-open"></i> Guarda-roupa</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="cozinha-plan" data-preco="800-1200">
+                                        <span><i class="fas fa-utensils"></i> Cozinha</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="closet-plan" data-preco="400-700">
+                                        <span><i class="fas fa-tshirt"></i> Closet / Walk-in</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="estante-plan" data-preco="250-400">
+                                        <span><i class="fas fa-book"></i> Estante</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="homeoffice-plan" data-preco="350-600">
+                                        <span><i class="fas fa-briefcase"></i> Home office</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="banheiro-plan" data-preco="300-500">
+                                        <span><i class="fas fa-shower"></i> Banheiro</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="lavanderia-plan" data-preco="200-350">
+                                        <span><i class="fas fa-soap"></i> Lavanderia</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="area-servico-plan" data-preco="150-300">
+                                        <span><i class="fas fa-broom"></i> Área de serviço</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="varanda-plan" data-preco="250-450">
+                                        <span><i class="fas fa-leaf"></i> Varanda / Terraço</span>
+                                    </label>
+                                    <label class="tipo-card" data-grupo="planejado">
+                                        <input type="radio" name="tipo" value="outro-plan" data-preco="0">
+                                        <span><i class="fas fa-pencil-alt"></i> Outro</span>
+                                    </label>
+
+                                    <!-- Padrões -->
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="guarda-roupa-pad" data-preco="80-150">
+                                        <span><i class="fas fa-door-open"></i> Guarda-roupa</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="cozinha-pad" data-preco="200-400">
+                                        <span><i class="fas fa-utensils"></i> Cozinha</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="sofa-pad" data-preco="100-200">
+                                        <span><i class="fas fa-couch"></i> Sofá / Estofado</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="rack-pad" data-preco="80-150">
+                                        <span><i class="fas fa-tv"></i> Rack / TV</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="cama-pad" data-preco="100-180">
+                                        <span><i class="fas fa-bed"></i> Cama (box, beliche)</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="berco-pad" data-preco="80-120">
+                                        <span><i class="fas fa-baby-carriage"></i> Berço</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="mesa-pad" data-preco="100-180">
+                                        <span><i class="fas fa-chair"></i> Mesa e cadeiras</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="estante-pad" data-preco="80-130">
+                                        <span><i class="fas fa-book"></i> Estante / Livreiro</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="escrivaninha-pad" data-preco="80-120">
+                                        <span><i class="fas fa-desktop"></i> Escrivaninha</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="comoda-pad" data-preco="60-100">
+                                        <span><i class="fas fa-archive"></i> Cômoda / Criado-mudo</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="painel-pad" data-preco="80-150">
+                                        <span><i class="fas fa-tv"></i> Painel / TV suspenso</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="banheiro-pad" data-preco="80-150">
+                                        <span><i class="fas fa-toilet"></i> Banheiro (gabinete)</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="area-servico-pad" data-preco="60-100">
+                                        <span><i class="fas fa-broom"></i> Área de serviço</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="varanda-pad" data-preco="80-150">
+                                        <span><i class="fas fa-leaf"></i> Varanda</span>
+                                    </label>
+                                    <label class="tipo-card hidden" data-grupo="padrao">
+                                        <input type="radio" name="tipo" value="outro-pad" data-preco="0">
+                                        <span><i class="fas fa-pencil-alt"></i> Outro</span>
+                                    </label>
+                                </div>
+                                <div id="outroContainer" style="display: none;">
+                                    <label for="outroTexto" class="form-label">Especifique o móvel</label>
+                                    <input type="text" id="outroTexto" class="form-input" placeholder="Descreva o móvel...">
+                                </div>
+                                <div class="preco-estimativa">
+                                    <span class="preco-label">Estimativa de preço:</span>
+                                    <span class="preco-valor" id="precoValor">R$ 300 – 500</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Detalhes do serviço -->
+                            <div class="card">
+                                <p class="card-title">Detalhes do serviço</p>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Quantidade de peças</label>
+                                        <select class="form-select" id="qtdPecas">
+                                            <option value="1">1 peça</option>
+                                            <option value="2">2 peças</option>
+                                            <option value="3">3 peças</option>
+                                            <option value="4">4 a 6 peças</option>
+                                            <option value="7">7 ou mais</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Complexidade do móvel</label>
+                                        <select class="form-select" id="complexidade">
+                                            <option value="simples">Simples (poucas peças)</option>
+                                            <option value="moderado">Média (gavetas/portas)</option>
+                                            <option value="complexo">Alta (muitos módulos)</option>
+                                            <option value="simples">Não sei informar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Descrição adicional</label>
+                                    <textarea class="form-textarea" id="descricao" placeholder="Ex: Guarda-roupa com espelho, precisa instalar trilhos e puxadores..."></textarea>
+                                </div>
+                                <div class="foto-upload">
+                                    <div class="foto-icon"><i class="fas fa-camera"></i></div>
+                                    <div class="foto-title">Adicionar fotos</div>
+                                    <div class="foto-sub">JPG, PNG ou PDF · Máx. 10MB</div>
+                                </div>
+                            </div>
+
+                            <!-- Card 4: Local e endereço -->
+                            <div class="card">
+                                <p class="card-title">Local e endereço</p>
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label class="form-label">CEP</label>
+                                        <input type="text" class="form-input" placeholder="00000-000" id="cep">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Rua</label>
+                                        <input type="text" class="form-input" placeholder="Nome da rua" id="rua">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Número</label>
+                                        <input type="text" class="form-input" placeholder="123" id="numero">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Complemento</label>
+                                        <input type="text" class="form-input" placeholder="Apto, bloco..." id="complemento">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Bairro</label>
+                                        <input type="text" class="form-input" placeholder="Bairro" id="bairro">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 5: Preferência de horário -->
+                            <div class="card">
+                                <p class="card-title">Preferência de horário</p>
+                                <div class="radio-group" id="horarioGroup">
+                                    <div class="radio-item selected" data-horario="manha" onclick="selectRadio(this)">
+                                        <div class="radio-dot"><div class="radio-dot-inner"></div></div>
+                                        <div><div class="radio-text">Manhã (08:00 – 12:00)</div></div>
+                                    </div>
+                                    <div class="radio-item" data-horario="tarde" onclick="selectRadio(this)">
+                                        <div class="radio-dot"><div class="radio-dot-inner"></div></div>
+                                        <div><div class="radio-text">Tarde (13:00 – 18:00)</div></div>
+                                    </div>
+                                    <div class="radio-item" data-horario="qualquer" onclick="selectRadio(this)">
+                                        <div class="radio-dot"><div class="radio-dot-inner"></div></div>
+                                        <div><div class="radio-text">Qualquer horário</div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Erro de validação -->
+                            <div id="orcamentoErro" style="display:none;color:#c0392b;background:#fdecea;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;"></div>
+
+                            <!-- Botões -->
+                            <div class="nav-btns">
+                                <a href="painel-cliente.html" class="btn btn-ghost">← Voltar</a>
+                                <button type="button" id="btnEnviarOrcamento" class="btn btn-primary btn-lg" onclick="enviarOrcamento()">Enviar orçamento ↗</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Coluna direita: resumo -->
+                    <div class="side-summary" id="sideSummary">
+                        <div class="card">
+                            <p class="card-title">Resumo do pedido</p>
+                            <div class="summary-item"><span class="summary-key">Categoria</span><span class="summary-val" id="sumCategoria">Planejados</span></div>
+                            <div class="summary-item"><span class="summary-key">Tipo</span><span class="summary-val" id="sumTipo">Guarda-roupa</span></div>
+                            <div class="summary-item"><span class="summary-key">Peças</span><span class="summary-val" id="sumPecas">1 peça</span></div>
+                            <div class="summary-item"><span class="summary-key">Complexidade</span><span class="summary-val" id="sumComplexidade">Simples</span></div>
+                            <div class="summary-item"><span class="summary-key">Local</span><span class="summary-val" id="sumLocal">—</span></div>
+                            <div class="summary-item"><span class="summary-key">Horário</span><span class="summary-val" id="sumHorario">Manhã</span></div>
+                        </div>
+                        <div class="price-estimate">
+                            <p class="price-estimate-label">Estimativa</p>
+                            <div class="price-range" id="priceRange">R$ 300 – 500</div>
+                            <div class="price-sub">Preço final definido pelo montador</div>
+                        </div>
+                        <div class="card info-card">
+                            <p class="info-title">Como funciona o pagamento?</p>
+                            <p class="info-text">O valor só é liberado ao montador após você confirmar que o serviço foi concluído com sucesso.</p>
+                        </div>
+                    </div>
+                </div><!-- /orcamento-layout -->
+
+            </div><!-- /orcamento-box -->
+        </div><!-- /orcamento-container -->
+    </div><!-- /login-wrapper -->
+
+    <!-- ==================== RODAPÉ ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <span>© 2026 Click Montagem</span>
+            <span class="footer-separator">–</span>
+            <a href="termos.html">Termos</a>
+            <span class="footer-separator">–</span>
+            <a href="privacidade.html">Privacidade</a>
+        </div>
+    </footer>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/orcamento.js"></script>
+
+</body>
+</html>

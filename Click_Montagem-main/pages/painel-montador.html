@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Montador — Click Montagem</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/painel-montador.css">
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <img src="../assets/img/LogoClick.png" class="logo-img">
+    <span class="nav-tag">Montador</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="painel-montador.html" class="active">Painel</a></li>
+    <li><a href="painel-montador.html#solicitacoes">Solicitações</a></li>
+    <li><a href="propostas.html">Minhas propostas</a></li>
+    <li><a href="agenda.html">Agenda</a></li>
+    <li><a href="painel-montador.html#ganhos">Ganhos</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="online-dot"></div>
+    <a href="editar-perfil-montador.html" class="nav-avatar" title="Editar perfil">—</a>
+    <span class="nav-username">Carregando...</span>
+    <button class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="painel-montador.html" class="active">Painel</a>
+  <a href="#solicitacoes">Solicitações</a>
+  <a href="propostas.html">Minhas propostas</a>
+  <a href="agenda.html">Agenda</a>
+  <a href="#ganhos">Ganhos</a>
+  <a href="editar-perfil-montador.html">Editar perfil</a>
+</div>
+
+<main class="page">
+
+  <!-- Saudação -->
+  <div class="welcome-bar">
+    <div>
+      <h1 class="welcome-title">Bom dia!</h1>
+      <p class="welcome-sub">Carregando solicitações e agendamentos...</p>
+    </div>
+    <a href="agenda.html"><button class="btn btn-primary">Ver agenda completa</button></a>
+  </div>
+
+  <!-- Métricas -->
+  <div class="metric-grid">
+    <div class="metric-card fade-up-1">
+      <p class="metric-lbl">Ganhos este mês</p>
+      <div class="metric-val">
+        <span class="currency">R$</span><span class="amount">2.340</span>
+      </div>
+      <p class="metric-sub clr-up">+18% vs. mês anterior</p>
+      <div class="metric-bar"><div class="metric-fill" style="width:72%"></div></div>
+    </div>
+    <div class="metric-card fade-up-2">
+      <p class="metric-lbl">Serviços concluídos</p>
+      <div class="metric-val">
+        <span class="amount">14</span>
+      </div>
+      <p class="metric-sub clr-muted">este mês</p>
+      <div class="metric-bar"><div class="metric-fill" style="width:58%"></div></div>
+    </div>
+    <div class="metric-card fade-up-3">
+      <p class="metric-lbl">Avaliação média</p>
+      <div class="metric-val">
+        <span class="amount">4.9</span>
+      </div>
+      <p class="metric-sub clr-warn">★ 234 avaliações</p>
+      <div class="metric-bar"><div class="metric-fill" style="width:98%"></div></div>
+    </div>
+    <div class="metric-card fade-up-4">
+      <p class="metric-lbl">Taxa de aceite</p>
+      <div class="metric-val">
+        <span class="amount">92%</span>
+      </div>
+      <p class="metric-sub clr-muted">dos pedidos</p>
+      <div class="metric-bar"><div class="metric-fill" style="width:92%"></div></div>
+    </div>
+  </div>
+
+  <div class="prop-layout">
+
+    <!-- COLUNA ESQUERDA -->
+    <div>
+
+      <!-- Novos pedidos -->
+      <div id="solicitacoes">
+        <div class="section-header">
+          <h2 class="section-h2">Novos pedidos</h2>
+          <span class="tag tag-pend">0 pendente(s)</span>
+        </div>
+        <div class="card" style="text-align:center;padding:24px;color:#888;">Carregando pedidos...</div>
+      </div>
+
+      <!-- Detalhes de ganhos -->
+      <div id="ganhos" style="margin-top: 28px;">
+        <h2 class="section-h2">Detalhes de ganhos</h2>
+        <div class="earnings-card">
+          <p class="earnings-month">Maio 2026</p>
+          <div class="earn-grid">
+            <div class="earn-cell">
+              <p class="earn-lbl">Recebido</p>
+              <div class="earn-val">
+                <span class="currency">R$</span><span class="amount">1.480</span>
+              </div>
+            </div>
+            <div class="earn-cell">
+              <p class="earn-lbl">A receber</p>
+              <div class="earn-val">
+                <span class="currency">R$</span><span class="amount">860</span>
+              </div>
+            </div>
+            <div class="earn-cell">
+              <p class="earn-lbl">Total</p>
+              <div class="earn-val">
+                <span class="currency">R$</span><span class="amount">2.340</span>
+              </div>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:63%"></div>
+          </div>
+          <p class="progress-text">63% do valor já liberado</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar-sticky">
+
+      <!-- Agenda -->
+      <div class="card">
+        <p class="card-title">Agenda da semana</p>
+
+        <div class="slot-item today">
+          <div class="slot-day">
+            <div class="slot-wk on">SEG</div>
+            <div class="slot-num on">4</div>
+          </div>
+          <div class="slot-body">
+            <p class="slot-title">Rack e TV — Pedro Costa</p>
+            <p class="slot-meta">10:00 · Lapa, SP</p>
+          </div>
+          <span class="tag tag-ok">Hoje</span>
+        </div>
+
+        <div class="slot-item">
+          <div class="slot-day">
+            <div class="slot-wk">TER</div>
+            <div class="slot-num">5</div>
+          </div>
+          <div class="slot-body">
+            <p class="slot-title">Guarda-roupa — João Silva</p>
+            <p class="slot-meta">09:00 · Consolação</p>
+          </div>
+          <span class="tag tag-ok">Confirmado</span>
+        </div>
+
+        <div class="slot-item">
+          <div class="slot-day">
+            <div class="slot-wk">QUA</div>
+            <div class="slot-num">6</div>
+          </div>
+          <div class="slot-body">
+            <p class="slot-title">Berço — Maria Fernanda</p>
+            <p class="slot-meta">14:00 · Vila Mariana</p>
+          </div>
+          <span class="tag tag-pend">Pendente</span>
+        </div>
+
+        <div class="slot-item">
+          <div class="slot-day">
+            <div class="slot-wk">SEX</div>
+            <div class="slot-num">8</div>
+          </div>
+          <div class="slot-body">
+            <p class="slot-title">Cozinha — Carlos Melo</p>
+            <p class="slot-meta">08:00 · Pinheiros</p>
+          </div>
+          <span class="tag tag-ok">Confirmado</span>
+        </div>
+
+        <a href="agenda.html"><button class="btn btn-ghost btn-full" style="margin-top:8px;">Ver agenda completa ↗</button></a>
+      </div>
+
+      <!-- Perfil -->
+      <div class="card" style="margin-top:14px;">
+        <p class="card-title">Meu perfil público</p>
+        <div class="profile-mini">
+          <div class="avatar av-md">—</div>
+          <div>
+            <p class="profile-name">Carregando...</p>
+            <p class="profile-meta">★ 0.0 · 0 serviços</p>
+          </div>
+        </div>
+        <a href="perfil-montador.html"><button class="btn btn-ghost btn-full">Ver perfil público ↗</button></a>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <span>© 2026 Click Montagem</span>
+    <span class="footer-sep">—</span>
+    <a href="termos.html">Termos</a>
+    <span class="footer-sep">—</span>
+    <a href="privacidade.html">Privacidade</a>
+  </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/painel-montador.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

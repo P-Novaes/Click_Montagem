@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório de Auditoria, Correções e Migração — Click Montagem</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 18mm 18mm 18mm;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #2b2b2b;
+      line-height: 1.5;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #3b271a;
+      font-size: 20pt;
+      border-bottom: 2px solid #c89d56;
+      padding-bottom: 8px;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    h2 {
+      color: #3b271a;
+      font-size: 13pt;
+      border-bottom: 1px solid #e0d5c1;
+      padding-bottom: 4px;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+    }
+    h3 {
+      color: #5c3f2b;
+      font-size: 11pt;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+    }
+    p, ul, ol {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    ul, ol {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    .badge-critical {
+      display: inline-block;
+      background: #fdecea;
+      color: #c0392b;
+      border: 1px solid #f5b7b1;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-fixed {
+      display: inline-block;
+      background: #e8f8f5;
+      color: #1e8449;
+      border: 1px solid #a3e4d7;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-migrated {
+      display: inline-block;
+      background: #fcf3cf;
+      color: #b7950b;
+      border: 1px solid #f9e79f;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      font-size: 9.5pt;
+    }
+    th, td {
+      border: 1px solid #d5dbdb;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f8f9f9;
+      color: #3b271a;
+      font-weight: 600;
+    }
+    .card-meta {
+      background: #fdfaf6;
+      border-left: 4px solid #c89d56;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      font-size: 9.5pt;
+    }
+    code {
+      background: #f2f3f4;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-family: Consolas, monospace;
+      font-size: 9pt;
+      color: #884400;
+    }
+    .footer {
+      font-size: 8.5pt;
+      color: #7f8c8d;
+      margin-top: 30px;
+      border-top: 1px solid #bdc3c7;
+      padding-top: 6px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Click Montagem — Relatório Técnico</h1>
+  <div class="card-meta">
+    <strong>Documento:</strong> Auditoria de Código, Correções Funcionais e Migração de Backend<br>
+    <strong>De:</strong> PHP 8 + MySQL Relacional (XAMPP/Apache)<br>
+    <strong>Para:</strong> Node.js LTS (v24) + Express + MongoDB (Mongoose)<br>
+    <strong>Frontend:</strong> HTML5 + CSS3 + Vanilla JavaScript (100% preservado)<br>
+    <strong>Status da Validação:</strong> 10/10 Testes de Integração Automatizados Aprovados
+  </div>
+
+  <h2>1. O Bug Crítico de Troca de Identidade ("João Silva" / "Marcos Oliveira")</h2>
+  <p>Ao realizar cadastro ou login de um novo usuário, a tela frequentemente continuava exibindo o nome de <strong>João Silva</strong> (ou <strong>Marcos Oliveira</strong>). Foram descobertas 4 causas estruturais:</p>
+  <ul>
+    <li><span class="badge-critical">Identificado</span> <strong>Textos Fixos (Hardcoded) no HTML:</strong> Páginas como <code>painel-cliente.html</code>, <code>orcamento.html</code>, <code>editar_perfil.html</code>, <code>propostas.html</code>, <code>painel-montador.html</code> e <code>agenda.html</code> possuíam os nomes "João Silva" (JS) e "Marcos Oliveira" (MO) gravados diretamente nos elementos de navegação e em <code>&lt;input value="..."&gt;</code>.</li>
+    <li><span class="badge-critical">Identificado</span> <strong>IDs de Fallback Estáticos no JavaScript:</strong> Em <code>propostas.js</code>, quando a URL não continha o ID do orçamento, o script forçava <code>orcId = 1</code> (o orçamento de João Silva). Em <code>avaliacao.js</code> havia <code>agendamentoAtualId = 1</code> e em <code>perfil-montador.js</code> havia <code>montadorId = 2</code>.</li>
+    <li><span class="badge-critical">Identificado</span> <strong>Ausência de Sessão no Servidor:</strong> O backend PHP original não gerenciava sessões ativas; confiava cegamente no <code>localStorage</code> do navegador, que acumulava dados de contas antigas e não era limpo.</li>
+    <li><span class="badge-fixed">Resolvido</span> <strong>Correção Implementada:</strong> Implementação de autenticação via sessão segura no servidor (<code>express-session</code> com <code>connect-mongo</code> em cookies <code>HttpOnly</code> e <code>SameSite=lax</code>), regeneração de ID de sessão a cada login/cadastro, limpeza automática de cache de armazenamento local legado e obtenção da identidade real através do endpoint central <code>GET /api/auth/me</code>.</li>
+  </ul>
+
+  <h2>2. Problemas Encontrados no Frontend e Como Foram Corrigidos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 28%;">Componente / Arquivo</th>
+        <th style="width: 36%;">O que estava errado / Inoperante</th>
+        <th style="width: 36%;">O que foi alterado e corrigido</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Solicitar Orçamento</strong><br><code>pages/orcamento.html</code></td>
+        <td>O botão de envio era um link fixo <code>&lt;a href="confirmacao-orcamento.html"&gt;</code> que nunca acionava o backend. Faltavam atributos <code>id</code> nos campos de endereço e valores nos seletores.</td>
+        <td>Formulário conectado a <code>enviarOrcamento()</code> via API REST. Adicionados IDs (<code>descricao</code>, <code>rua</code>, <code>numero</code>, <code>bairro</code>), valores válidos e validação visual de erros.</td>
+      </tr>
+      <tr>
+        <td><strong>Confirmação de Orçamento</strong><br><code>pages/confirmacao-orcamento.html</code></td>
+        <td>Página 100% estática. Mostrava sempre dados fictícios de um guarda-roupa já preenchido.</td>
+        <td>Conectada via <code>GET /api/orcamentos/:id</code> para carregar e exibir na hora o pedido real recém-criado no MongoDB.</td>
+      </tr>
+      <tr>
+        <td><strong>Aceite de Proposta / Modal</strong><br><code>pages/propostas.html</code></td>
+        <td>O botão <em>"Confirmar agendamento"</em> dentro do modal de data não possuía ação vinculada (clicava e nada acontecia). Faltava folha de estilos do FontAwesome.</td>
+        <td>Adicionado evento <code>aceitarProposta()</code> com integração ao backend (criando o agendamento real e fechando o orçamento) e incluído FontAwesome.</td>
+      </tr>
+      <tr>
+        <td><strong>JavaScript Global</strong><br><code>assets/js/script.js</code></td>
+        <td>Causava erro fatal no console (<code>TypeError: null reading addEventListener</code> na linha 87) em todas as páginas exceto na página inicial.</td>
+        <td>Adicionada checagem defensiva de existência antes de associar ouvintes de eventos a seletores dinâmicos.</td>
+      </tr>
+      <tr>
+        <td><strong>Edição de Perfil</strong><br><code>editar_perfil.html</code> / <code>editar-perfil-montador.html</code></td>
+        <td>Os campos vinham preenchidos com os dados de exemplo no código-fonte e faltava opção de exclusão.</td>
+        <td>Removidos valores hardcoded; os formulários agora preenchem com os dados reais do usuário logado via <code>GET /api/auth/me</code> e permitem salvar alterações e excluir conta.</td>
+      </tr>
+      <tr>
+        <td><strong>Agenda do Montador</strong><br><code>pages/agenda.html</code></td>
+        <td>Um bloco de script inline sobrescrevia a função de adicionar disponibilidade com um alerta estático sem persistência.</td>
+        <td>Removido script duplicado; a agenda agora consome <code>agenda.js</code> com dados do banco e atualização real de status.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Vulnerabilidades de Segurança do Backend PHP e a Nova API Node.js</h2>
+  <ul>
+    <li><strong>IDOR (Insecure Direct Object Reference):</strong> No PHP antigo, qualquer usuário podia editar o orçamento, ver propostas ou excluir registros de outra pessoa apenas passando o ID de outro usuário. Na nova API em Node.js, os serviços (<code>orcamentoService</code>, <code>propostaService</code>, etc.) validam a propriedade do registro com o <code>req.user._id</code> da sessão.</li>
+    <li><strong>Validação de Senhas e Redefinição:</strong> No PHP, a rota <code>redefinir_senha</code> mudava a senha de qualquer e-mail sem validar o token. No Node.js foi criado fluxo seguro com token criptográfico de uso único (SHA-256) com tempo de expiração de 1 hora.</li>
+    <li><strong>Proteção CSRF e NoSQL Injection:</strong> Adicionado middleware de sanitização recursiva contra operadores maliciosos (<code>$</code> e <code>.</code>) e proteção CSRF vinculada à sessão em requisições mutáveis (POST/PUT/PATCH/DELETE).</li>
+    <li><strong>Senhas Fortes:</strong> Armazenamento seguro de senhas através de <code>bcryptjs</code> com fator de custo 12.</li>
+  </ul>
+
+  <h2>4. Migração e Modelagem MongoDB</h2>
+  <p>O antigo banco relacional MySQL foi transformado em coleções no MongoDB gerenciadas pelo Mongoose:</p>
+  <ul>
+    <li><strong><code>usuarios</code>:</strong> Centraliza clientes e montadores. Dados profissionais de montador ficam embutidos no subdocumento <code>montador</code> (com índice esparso e único em <code>cpf_cnpj</code>).</li>
+    <li><strong><code>orcamentos</code>:</strong> Documentos estruturados com campos de endereço, turno e status de ciclo de vida.</li>
+    <li><strong><code>propostas</code>:</strong> Possui índice composto exclusivo <code>{ orcamento_id: 1, montador_id: 1 }</code>, impedindo propostas duplicadas do mesmo montador no banco.</li>
+    <li><strong><code>agendamentos</code>:</strong> Com índice único para evitar múltiplos agendamentos concorrentes no mesmo orçamento.</li>
+    <li><strong><code>avaliacoes</code>:</strong> Vinculadas ao agendamento, permitidas apenas após o status <code>concluido</code> e limitadas a 1 por serviço.</li>
+    <li><strong><code>notificacoes</code>:</strong> Notificações em tempo real sobre propostas recebidas, agendamentos e avaliações.</li>
+  </ul>
+
+  <h2>5. Suíte de Testes Automatizados (100% Aprovada)</h2>
+  <p>Foi desenvolvida uma suíte completa de testes de integração em <code>tests/api.test.js</code> executando contra banco isolado (<code>click_montagem_test</code>). Todos os 10 cenários foram executados e aprovados:</p>
+  <ol>
+    <li>Cadastro de clientes e montadores com bloqueio de e-mail e CPF duplicados.</li>
+    <li>Isolamento rigoroso de sessão e alternância de contas (verificando resolução definitiva do bug de identidade).</li>
+    <li>Login, logout, expiração e recuperação de senha segura com token descartável.</li>
+    <li>Proteção de rotas, autorização de perfis (anti-IDOR) e barreira contra ataques CSRF.</li>
+    <li>Criação, busca e isolamento de orçamentos entre diferentes clientes.</li>
+    <li>Envio de propostas e bloqueio de proposta duplicada no mesmo serviço.</li>
+    <li>Aceite de proposta com recusa automática de concorrentes e criação atômica do agendamento.</li>
+    <li>Ciclo de vida do serviço, proibição de avaliação antecipada e recálculo da nota média do montador.</li>
+    <li>Atualização de perfis cadastrais e marcação de notificações lidas.</li>
+    <li>Regras de cancelamento e integridade de histórico de serviços em andamento.</li>
+  </ol>
+
+  <div class="footer">
+    Click Montagem — Sistema Auditado, Corrigido e Migrado para Node.js / Express / MongoDB
+  </div>
+
+</body>
+</html>
+

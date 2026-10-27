@@ -1,0 +1,14 @@
+{
+  "name": "click-montagem-workspace",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Wrapper de conveniência para executar comandos a partir da pasta raiz do workspace",
+  "scripts": {
+    "start": "npm --prefix ./Click_Montagem-main start",
+    "dev": "npm --prefix ./Click_Montagem-main run dev",
+    "seed": "npm --prefix ./Click_Montagem-main run seed",
+    "migrate:mysql": "npm --prefix ./Click_Montagem-main run migrate:mysql",
+    "test": "npm --prefix ./Click_Montagem-main test"
+  }
+}
+

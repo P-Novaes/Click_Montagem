@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar — Click Montagem</title>
+    <meta name="description" content="Faça login ou cadastre-se no Click Montagem">
+
+    <!-- CSS BASE -->
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+
+    <!-- ÍCONES -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🪑%3C/text%3E%3C/svg%3E">
+</head>
+<body class="login-page">
+
+    <!-- ==================== NAVBAR MÍNIMA ==================== -->
+    <nav class="nav nav-login">
+        <a href="../index.html" class="nav-logo">
+            <img src="../assets/img/LogoClick.png" alt="Click Montagem" class="nav-logo-img">
+        </a>
+    </nav>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <div class="login-wrapper">
+        <div class="login-card">
+            <!-- Abas -->
+            <div class="login-tabs">
+                <button class="login-tab active" data-tab="login" onclick="switchTab('login')">Entrar</button>
+                <button class="login-tab" data-tab="cadastro" onclick="switchTab('cadastro')">Cadastrar</button>
+            </div>
+
+            <!-- Feedback -->
+            <div class="form-feedback" id="formFeedback">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="feedbackText"></span>
+            </div>
+
+            <!-- ========== FORMULÁRIO DE LOGIN ========== -->
+            <form class="login-form active" id="formLogin">
+                <h2 class="form-title">Bem-vindo de volta!</h2>
+                <p class="form-subtitle">Acesse sua conta para gerenciar agendamentos e orçamentos</p>
+
+                <div class="form-group">
+                    <label for="loginEmail">E-mail <span class="required">*</span></label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon-left"></i>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="seu@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginSenha">Senha <span class="required">*</span></label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon-left"></i>
+                        <input type="password" id="loginSenha" class="form-control" placeholder="Sua senha" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('loginSenha', this)" tabindex="-1">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="recuperar_senha.html">Esqueceu sua senha?</a>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-submit" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </button>
+            </form>
+
+            <!-- ========== FORMULÁRIO DE CADASTRO ========== -->
+            <form class="cadastro-form" id="formCadastro">
+                <h2 class="form-title">Criar nova conta</h2>
+                <p class="form-subtitle">Preencha os dados abaixo para começar</p>
+
+                <!-- Seleção de Perfil -->
+                <div class="role-selection">
+                    <label>Tipo de conta <span class="required">*</span></label>
+                    <div class="role-options">
+                        <label class="role-option">
+                            <input type="radio" name="role" value="cliente" checked onchange="selectRole('cliente')">
+                            <div class="role-option-card">
+                                <i class="fas fa-user"></i>
+                                <strong>Sou Cliente</strong>
+                            </div>
+                        </label>
+                        <label class="role-option">
+                            <input type="radio" name="role" value="montador" onchange="selectRole('montador')">
+                            <div class="role-option-card">
+                                <i class="fas fa-tools"></i>
+                                <strong>Sou Montador</strong>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadNome">Nome completo <span class="required">*</span></label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-user input-icon-left"></i>
+                        <input type="text" id="cadNome" class="form-control" placeholder="Seu nome completo" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadEmail">E-mail <span class="required">*</span></label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon-left"></i>
+                        <input type="email" id="cadEmail" class="form-control" placeholder="seu@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadTelefone">Telefone <span class="required">*</span></label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-phone input-icon-left"></i>
+                        <input type="tel" id="cadTelefone" class="form-control" placeholder="(00) 00000-0000" maxlength="15" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadSenha">Senha <span class="required">*</span></label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon-left"></i>
+                        <input type="password" id="cadSenha" class="form-control" placeholder="Mínimo 6 caracteres" minlength="6" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('cadSenha', this)" tabindex="-1">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cadConfirmarSenha">Confirmar senha <span class="required">*</span></label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon-left"></i>
+                        <input type="password" id="cadConfirmarSenha" class="form-control" placeholder="Repita sua senha" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('cadConfirmarSenha', this)" tabindex="-1">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="cadTermos" required>
+                   <label for="cadTermos">Li e aceito os <a href="termos.html" target="_blank">Termos de Uso</a> e a <a href="privacidade.html" target="_blank">Política de Privacidade</a>.</label>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-submit" onclick="handleCadastro()">
+                    <i class="fas fa-user-plus"></i> Criar Conta
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== RODAPÉ ==================== -->
+    <footer class="login-footer">
+    <div class="footer-content">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-separator">–</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-separator">–</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+    <!-- SCRIPTS -->
+     <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/login.js"></script>
+</body>
+</html>

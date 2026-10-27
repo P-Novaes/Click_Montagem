@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento Enviado — Click Montagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/confirmacao-orcamento.css">
+</head>
+<body>
+
+<!-- Nav do cliente (João Silva logado) -->
+<nav class="nav">
+    <div class="nav-left">
+        <a href="../index.html" class="nav-logo">
+            <img src="../assets/img/LogoClick.png" alt="Click Montagem" class="nav-logo-img" style="height:40px;">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="painel-cliente.html">Painel</a></li>
+        <li><a href="orcamento.html">Novo orçamento</a></li>
+        <li><a href="propostas.html">Propostas</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <a href="editar_perfil.html" class="nav-avatar" title="Editar perfil">—</a>
+        <span class="nav-username">Carregando...</span>
+        <button class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="painel-cliente.html">Painel</a>
+    <a href="orcamento.html">Novo orçamento</a>
+    <a href="propostas.html">Propostas</a>
+    <a href="editar_perfil.html">Editar perfil</a>
+</div>
+
+<main class="page">
+    <div class="confirmacao-container">
+
+        <div class="confirmacao-icon">
+            <i class="fas fa-check"></i>
+        </div>
+
+        <h1 class="confirmacao-titulo">Orçamento enviado com sucesso!</h1>
+        <p class="confirmacao-sub">
+            Seu pedido de orçamento foi registrado no banco de dados. Em breve você receberá propostas de montadores qualificados.
+            Fique de olho no seu painel e nas notificações.
+        </p>
+
+        <div class="confirmacao-detalhes">
+            <h3>Resumo do pedido</h3>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Categoria</span>
+                <span class="detalhe-valor" id="confCategoria">Carregando...</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Tipo de móvel</span>
+                <span class="detalhe-valor" id="confTipo">—</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Quantidade de peças</span>
+                <span class="detalhe-valor" id="confPecas">—</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Localização</span>
+                <span class="detalhe-valor" id="confLocal">—</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Preferência de horário</span>
+                <span class="detalhe-valor" id="confHorario">—</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-chave">Estimativa</span>
+                <span class="detalhe-valor" id="confPreco" style="color: var(--dourado); font-weight: 700;">—</span>
+            </div>
+        </div>
+
+        <a href="propostas.html" id="linkVerPropostas">
+            <button class="btn btn-primary btn-grande">
+                <i class="fas fa-file-invoice"></i> Ver propostas recebidas
+            </button>
+        </a>
+        <a href="painel-cliente.html" style="display: block; margin-top: 14px;">
+            <button class="btn btn-ghost btn-voltar-painel">
+                ← Voltar ao painel
+            </button>
+        </a>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-links">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-sep">—</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-sep">—</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+    await Sessao.sincronizar();
+    if (!Sessao.logado()) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    if (!id) {
+        window.location.href = 'orcamento.html';
+        return;
+    }
+
+    try {
+        const res = await API.orcamentos.buscar(id);
+        const o = res.orcamento;
+        if (!o) {
+            window.location.href = 'painel-cliente.html';
+            return;
+        }
+
+        const isPlanejado = o.categoria === 'planejado';
+        document.getElementById('confCategoria').textContent = isPlanejado ? 'Planejados' : 'Padrões';
+        document.getElementById('confTipo').textContent = o.descricao ? `${o.tipo_movel} (${o.descricao})` : o.tipo_movel;
+        document.getElementById('confPecas').textContent = `${o.quantidade_pecas || 1} peça(s)`;
+        document.getElementById('confLocal').textContent = [o.rua, o.numero, o.bairro, o.cep].filter(Boolean).join(', ') || '—';
+        const mapHor = { manha: 'Manhã (08:00 – 12:00)', tarde: 'Tarde (13:00 – 18:00)', qualquer: 'Qualquer horário' };
+        document.getElementById('confHorario').textContent = mapHor[o.horario] || o.horario || 'Manhã';
+        document.getElementById('confPreco').textContent = o.preco_estimado || 'Sob consulta';
+
+        const linkVer = document.getElementById('linkVerPropostas');
+        if (linkVer) linkVer.href = `propostas.html?orc_id=${o.id}`;
+    } catch (_) {
+        window.location.href = 'painel-cliente.html';
+    }
+});
+</script>
+</body>
+</html>

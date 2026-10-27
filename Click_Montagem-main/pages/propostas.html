@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propostas — Click Montagem</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/propostas.css">
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <img src="../assets/img/LogoClick.png" class="logo-img" alt="Click Montagem">
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="painel-cliente.html">Painel</a></li>
+    <li><a href="orcamento.html">Novo orçamento</a></li>
+    <li><a href="propostas.html" class="active">Propostas</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="editar_perfil.html" class="nav-avatar" title="Editar perfil">—</a>
+    <span class="nav-username">Carregando...</span>
+    <button class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="painel-cliente.html">Painel</a>
+  <a href="orcamento.html">Novo orçamento</a>
+  <a href="propostas.html" class="active">Propostas</a>
+  <a href="editar_perfil.html">Editar perfil</a>
+</div>
+
+<main class="page">
+
+  <div class="breadcrumb">Painel › <span class="breadcrumb-active">Propostas recebidas</span></div>
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Propostas para seu serviço</h1>
+        <p class="page-sub">Carregando detalhes do orçamento...</p>
+      </div>
+
+      <span class="tag tag-pend dourado"><i class="fas fa-check-circle"></i> 0 proposta(s) recebida(s)</span>
+    </div>
+  
+
+  <div class="prop-filter">
+    <button class="filt-btn active">Todos</button>
+    <button class="filt-btn">Melhor avaliados</button>
+    <button class="filt-btn">Menor preço</button>
+    <button class="filt-btn">Disponível mais cedo</button>
+  </div>
+
+  <div class="prop-layout">
+
+    <!-- LISTA -->
+    <div id="propostasListContainer">
+      <div class="card" style="text-align:center;padding:30px;color:#888;">Carregando propostas...</div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar-sticky">
+
+      <div class="card">
+        <p class="title">Resumo do pedido</p>
+
+        <div class="sum-row">
+          <span>Tipo</span>
+          <span>—</span>
+        </div>
+
+        <div class="sum-row">
+          <span>Peças</span>
+          <span>—</span>
+        </div>
+
+        <div class="sum-row">
+          <span>Local</span>
+          <span>—</span>
+        </div>
+
+        <div class="sum-row">
+          <span>Preferência</span>
+          <span>—</span>
+        </div>
+
+        <div class="price-range">—</div>
+      </div>
+
+      <div class="safe-box">
+        <div class="safe-header">
+          <div class="safe-icon">✓</div>
+          <span>Pagamento protegido</span>
+        </div>
+
+        <p class="safe-text">
+          O valor só é liberado ao montador após você confirmar a conclusão do serviço.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="scheduleModal">
+  <div class="modal">
+    <p class="modal-title">Escolha a data</p>
+    <p class="page-sub">Selecione o dia preferido para o serviço</p>
+    
+    <div class="date-header">
+      <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+    </div>
+
+    <div class="date-grid">
+      <button class="date-btn past">19</button>
+      <button class="date-btn past">20</button>
+      <button class="date-btn selected">21</button>
+      <button class="date-btn">22</button>
+      <button class="date-btn">23</button>
+      <button class="date-btn">24</button>
+      <button class="date-btn">25</button>
+      <button class="date-btn">26</button>
+      <button class="date-btn">27</button>
+      <button class="date-btn">28</button>
+      <button class="date-btn">29</button>
+      <button class="date-btn">30</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Horário preferido</label>
+      <select class="form-select">
+        <option>09:00 – 12:00 (Manhã)</option>
+        <option>13:00 – 17:00 (Tarde)</option>
+      </select>
+    </div>
+
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="aceitarProposta()">Confirmar agendamento ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ FOOTER CORRIGIDO -->
+<footer class="footer">
+  <div class="footer-links">
+    <span>© 2026 Click Montagem</span>
+    <span class="footer-sep">—</span>
+    <a href="termos.html">Termos</a>
+    <span class="footer-sep">—</span>
+    <a href="privacidade.html">Privacidade</a>
+  </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/propostas.js"></script>
+
+</body>
+</html>

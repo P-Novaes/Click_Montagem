@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Cliente — Click Montagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/shared.css">
+    <link rel="stylesheet" href="../assets/css/painel-cliente.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-left">
+        <img src="../assets/img/LogoClick.png" class="logo-img" alt="Click Montagem">
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="painel-cliente.html" class="active">Painel</a></li>
+        <li><a href="orcamento.html">Novo orçamento</a></li>
+        <li><a href="propostas.html">Propostas</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <a href="editar_perfil.html" class="nav-avatar" title="Editar perfil">—</a>
+        <span class="nav-username">Carregando...</span>
+        <button class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="painel-cliente.html" class="active">Painel</a>
+    <a href="orcamento.html">Novo orçamento</a>
+    <a href="propostas.html">Propostas</a>
+    <a href="editar_perfil.html">Editar perfil</a>
+</div>
+
+<main class="page">
+
+    <!-- Welcome Bar -->
+    <div class="welcome-bar fade-up">
+        <div>
+            <p class="welcome-text">Olá!</p>
+            <p class="welcome-sub">Carregando seu painel...</p>
+        </div>
+        <a href="orcamento.html"><button class="btn btn-primary btn-lg">+ Novo orçamento</button></a>
+    </div>
+
+    <!-- Quick Grid -->
+    <div class="quick-grid">
+        <a href="orcamento.html" class="quick-card fade-up-1">
+            <div class="qc-icon qc-oak">
+                <i class="fas fa-plus"></i>
+            </div>
+            <p class="qc-title">Solicitar orçamento</p>
+            <p class="qc-sub">Monte novos móveis</p>
+        </a>
+        <a href="propostas.html" class="quick-card fade-up-2">
+            <div class="qc-icon qc-warn">
+                <i class="fas fa-file-invoice"></i>
+            </div>
+            <p class="qc-title">Ver propostas</p>
+            <p class="qc-sub">Acompanhe orçamentos</p>
+        </a>
+        <a href="../index.html#montadores" class="quick-card fade-up-3">
+            <div class="qc-icon qc-green">
+                <i class="fas fa-users"></i>
+            </div>
+            <p class="qc-title">Buscar montadores</p>
+            <p class="qc-sub">Profissionais verificados</p>
+        </a>
+    </div>
+
+    <!-- Review Prompt -->
+    <div class="review-prompt fade-up" style="display:none;">
+        <div class="rp-left">
+            <div class="avatar av-sm">—</div>
+            <div>
+                <p class="rp-text">Avalie seu serviço</p>
+                <p class="rp-sub">Serviço concluído</p>
+            </div>
+        </div>
+        <a href="avaliacao.html"><button class="btn btn-primary">Avaliar agora ↗</button></a>
+    </div>
+
+    <!-- Próximos Agendamentos -->
+    <div id="agendamentos">
+        <div class="section-header">
+            <h2 class="section-h2">Próximos agendamentos</h2>
+            <a href="orcamento.html"><button class="btn btn-ghost">Novo orçamento</button></a>
+        </div>
+    </div>
+
+    <!-- Histórico de Serviços -->
+    <div style="margin-top: 28px;">
+        <div class="section-header">
+            <h2 class="section-h2">Histórico de serviços</h2>
+        </div>
+        <div class="card" id="historicoContainer">
+            <p style="padding:18px;color:#888;text-align:center;">Carregando histórico...</p>
+        </div>
+    </div>
+
+</main>
+
+<!-- ✅ FOOTER CORRIGIDO -->
+<footer class="footer">
+    <div class="footer-links">
+        <span>© 2026 Click Montagem</span>
+        <span class="footer-sep">—</span>
+        <a href="termos.html">Termos</a>
+        <span class="footer-sep">—</span>
+        <a href="privacidade.html">Privacidade</a>
+    </div>
+</footer>
+
+<script src="../assets/js/api.js"></script>
+<script src="../assets/js/painel-cliente.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

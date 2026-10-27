@@ -1,0 +1,31 @@
+{
+  "name": "click-montagem",
+  "version": "2.0.0",
+  "description": "Plataforma web que conecta clientes e profissionais de montagem de móveis (Node.js, Express, MongoDB)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node scripts/seed.js",
+    "migrate:mysql": "node scripts/migrate-mysql-to-mongo.js",
+    "test": "node --test tests/**/*.test.js",
+    "test:api": "node --test tests/api.test.js",
+    "test:e2e": "node tests/e2e-browser.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  }
+}
