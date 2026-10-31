@@ -32,16 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const res = await API.usuarios.recuperarSenha(email);
 
-            sessionStorage.setItem(
-                'recuperacaoToken',
-                JSON.stringify({
-                    email: res.email || email,
-                    token: res.token,
-                    expira: Date.now() + 3600000,
-                })
-            );
-
-            emailEnviado.innerHTML = `<strong>${email}</strong><br><br><a href="/pages/redefinir_senha.html?token=${encodeURIComponent(res.token)}&email=${encodeURIComponent(email)}" class="btn btn-primary" style="display:inline-block; margin-top:8px;">Redefinir Senha Agora ↗</a>`;
+            emailEnviado.textContent = res.mensagem;
             formSection.style.display = 'none';
             sucessoSection.classList.add('show');
         } catch (err) {

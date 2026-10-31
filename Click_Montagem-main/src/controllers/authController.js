@@ -2,21 +2,8 @@ const userService = require('../services/userService');
 const asyncHandler = require('../utils/asyncHandler');
 const { ensureCsrfToken } = require('../middlewares/security');
 const env = require('../config/env');
-
-function regenerateSessionAsync(req, usuario) {
-    return new Promise((resolve, reject) => {
-        if (!req.session) return resolve();
-        req.session.regenerate((err) => {
-            if (err) return reject(err);
-            req.session.userId = usuario.id;
-            req.session.userType = usuario.tipo;
-            req.session.save((saveErr) => {
-                if (saveErr) return reject(saveErr);
-                resolve();
-            });
-        });
-    });
-}
+const { establishSession } = require('../utils/authSession');
+const google = require('../services/googleOAuthService');
 
 function destroySessionAsync(req) {
     return new Promise((resolve) => {
@@ -27,8 +14,7 @@ function destroySessionAsync(req) {
 
 const cadastrar = asyncHandler(async (req, res) => {
     const usuario = await userService.cadastrarUsuario(req.body);
-    await regenerateSessionAsync(req, usuario);
-    const csrfToken = ensureCsrfToken(req, res);
+    const csrfToken = await establishSession(req, usuario, res);
 
     res.status(201).json({
         sucesso: true,
@@ -40,8 +26,7 @@ const cadastrar = asyncHandler(async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
     const usuario = await userService.autenticarUsuario(req.body);
-    await regenerateSessionAsync(req, usuario);
-    const csrfToken = ensureCsrfToken(req, res);
+    const csrfToken = await establishSession(req, usuario, res);
 
     res.status(200).json({
         sucesso: true,
@@ -52,6 +37,7 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const logout = asyncHandler(async (req, res) => {
+    await google.cancel(req.sessionID);
     await destroySessionAsync(req);
     res.clearCookie(env.sessionName, { path: '/' });
     res.clearCookie('XSRF-TOKEN', { path: '/' });
@@ -77,6 +63,7 @@ const me = asyncHandler(async (req, res) => {
     return res.status(200).json({
         sucesso: true,
         autenticado: true,
+        cadastroPendente: usuario.cadastroCompleto === false || !usuario.tipo,
         usuario,
         csrfToken,
     });
@@ -119,12 +106,10 @@ const alterarSenha = asyncHandler(async (req, res) => {
 });
 
 const recuperarSenha = asyncHandler(async (req, res) => {
-    const { token, email } = await userService.iniciarRecuperacaoSenha(req.body.email);
+    await userService.iniciarRecuperacaoSenha(req.body.email);
     res.status(200).json({
         sucesso: true,
-        mensagem: `Instruções para redefinição enviadas para ${email}`,
-        token,
-        email,
+        mensagem: 'Se houver uma conta com senha para este e-mail, enviaremos as instruções de recuperação.',
     });
 });
 

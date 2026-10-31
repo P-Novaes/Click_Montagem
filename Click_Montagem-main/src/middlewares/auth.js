@@ -36,6 +36,9 @@ const requireAuth = asyncHandler(async (req, _res, next) => {
         req.user = user;
     }
 
+    if (req.user.cadastroCompleto === false || !req.user.tipo) {
+        throw new AppError('Conclua seu cadastro antes de acessar esta funcionalidade.', 403);
+    }
     next();
 });
 

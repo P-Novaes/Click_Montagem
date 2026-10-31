@@ -106,6 +106,12 @@ async function handleLogin() {
 
     try {
         Sessao.limpar();
+        if (document.getElementById('googleLink')?.checked) {
+            await API.auth.csrf();
+            const result = await apiFetch('auth/google/link', { method: 'POST', body: { email, senha } });
+            window.location.assign(result.url);
+            return;
+        }
         const data = await API.usuarios.login({ email, senha });
         Sessao.salvar(data.usuario);
         showFeedback('Login realizado! Redirecionando…', 'success');
@@ -152,8 +158,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (params.get('logout')) {
         await API.auth.logout().catch(() => {});
         Sessao.limpar();
-        return;
+        history.replaceState(null, '', window.location.pathname);
     }
 
-    await Sessao.sincronizar(true);
+    const user = await Sessao.sincronizar(true);
+    await initializeGoogleAuth(user, params);
 });

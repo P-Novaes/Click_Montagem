@@ -6,18 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenUrl = urlParams.get('token');
     const emailUrl = urlParams.get('email');
-    const recuperacao = JSON.parse(sessionStorage.getItem('recuperacaoToken') || '{}');
-
-    const emailAlvo = emailUrl || recuperacao.email;
-    const tokenAlvo = tokenUrl || recuperacao.token;
+    const emailAlvo = emailUrl;
+    const tokenAlvo = tokenUrl;
+    sessionStorage.removeItem('recuperacaoToken');
+    history.replaceState(null, '', window.location.pathname);
 
     const formSection = document.getElementById('formSection');
     const tokenInvalido = document.getElementById('tokenInvalido');
     const sucessoSection = document.getElementById('sucessoSection');
 
     const tokenValido =
-        Boolean(tokenAlvo && emailAlvo) &&
-        (!recuperacao.expira || Date.now() <= recuperacao.expira);
+        Boolean(tokenAlvo && emailAlvo);
 
     if (!tokenValido) {
         if (formSection) formSection.style.display = 'none';

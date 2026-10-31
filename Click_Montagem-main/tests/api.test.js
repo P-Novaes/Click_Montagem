@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 
-const { test, describe, before, after } = require('node:test');
+const { test, describe, before, after, mock } = require('node:test');
 const assert = require('node:assert/strict');
 const request = require('supertest');
 const mongoose = require('mongoose');
@@ -18,6 +18,8 @@ const {
 } = require('../src/models');
 
 let app;
+const passwordResetMailer = require('../src/services/passwordResetMailer');
+const deliveredTokens = new Map();
 
 /**
  * Helper: obtém o token CSRF vinculado à sessão do agente
@@ -32,6 +34,9 @@ async function getCsrf(agent) {
 
 describe('Click Montagem — Suite de Testes Automatizados (Node.js + Express + MongoDB)', () => {
   before(async () => {
+    // Simulate delivery only: reset tokens must never be returned to API callers.
+    mock.method(passwordResetMailer, 'assertConfigured', () => {});
+    mock.method(passwordResetMailer, 'sendResetLink', async (email, token) => deliveredTokens.set(email, token));
     await ensureLocalMongoRunning();
     await connectDatabase();
     // Segurança: apenas o banco isolado de testes pode ser limpo
@@ -51,6 +56,7 @@ describe('Click Montagem — Suite de Testes Automatizados (Node.js + Express + 
   });
 
   after(async () => {
+    mock.restoreAll();
     await disconnectDatabase();
   });
 
@@ -254,7 +260,8 @@ describe('Click Montagem — Suite de Testes Automatizados (Node.js + Express + 
       email: 'bruno@teste.com',
     });
     assert.equal(recRes.status, 200);
-    const resetToken = recRes.body.token;
+    assert.equal(recRes.body.token, undefined);
+    const resetToken = deliveredTokens.get('bruno@teste.com');
     assert.ok(resetToken);
 
     // Tentativa de redefinir senha com token inválido deve falhar

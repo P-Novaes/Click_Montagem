@@ -39,6 +39,14 @@ function createApp() {
     const rootDir = path.resolve(__dirname, '..');
 
     app.disable('x-powered-by');
+    if (env.trustProxy) app.set('trust proxy', env.trustProxy.split(',').map(value => value.trim()));
+    if (env.isProd && mongoose.connection.readyState !== 1) {
+        throw new Error('MongoDB é obrigatório para armazenar sessões em produção.');
+    }
+    app.use((req, res, next) => {
+        if (env.isProd && !req.secure) return res.status(400).json({ sucesso: false, erro: 'HTTPS obrigatório.' });
+        next();
+    });
 
     // Cabeçalhos de segurança HTTP preservando compatibilidade com FontAwesome e scripts inline do frontend
     app.use(
@@ -106,6 +114,9 @@ function createApp() {
         // Páginas privadas exigem usuário autenticado na sessão do servidor
         if (!req.user) {
             return res.redirect('/pages/login.html');
+        }
+        if (req.user.cadastroCompleto === false || !req.user.tipo) {
+            return res.redirect('/pages/login.html?google=complete');
         }
 
         // Controle de acesso por perfil nas páginas

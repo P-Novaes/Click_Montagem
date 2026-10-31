@@ -2,12 +2,17 @@ const env = require('./config/env');
 const { connectDatabase, disconnectDatabase } = require('./config/database');
 const { ensureLocalMongoRunning } = require('./config/localMongoRunner');
 const { createApp } = require('./app');
+const { User } = require('./models');
+const OAuthAttempt = require('./models/OAuthAttempt');
+const google = require('./services/googleOAuthService');
 
 async function startServer() {
     try {
         await ensureLocalMongoRunning(env.mongoUri);
         await connectDatabase(env.mongoUri);
-        console.log(`[ClickMontagem] Conectado ao MongoDB: ${env.mongoUri}`);
+        await Promise.all([User.init(), OAuthAttempt.init()]);
+        if (env.googleClientId || env.googleClientSecret || env.googleCallbackUrl) google.validateConfig();
+        console.log('[ClickMontagem] Conectado ao MongoDB.');
 
         const app = createApp();
         const server = app.listen(env.port, () => {

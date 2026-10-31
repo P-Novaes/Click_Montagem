@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const { User, Avaliacao, Agendamento, Notificacao, Orcamento, Proposta } = require('../models');
 const AppError = require('../utils/AppError');
+const passwordResetMailer = require('./passwordResetMailer');
 const {
     assertObjectId,
     EMAIL_REGEX,
@@ -109,10 +110,10 @@ async function autenticarUsuario(body) {
     const { email, senha } = validarLoginInput(body);
 
     const user = await User.findOne({ email }).select('+senha');
-    const hashParaVerificar = user ? normalizarHashBcrypt(user.senha) : DUMMY_BCRYPT_HASH;
+    const hashParaVerificar = user?.senha ? normalizarHashBcrypt(user.senha) : DUMMY_BCRYPT_HASH;
     const senhaValida = await bcrypt.compare(senha, hashParaVerificar);
 
-    if (!user || !senhaValida) {
+    if (!user?.senha || !senhaValida) {
         throw new AppError('E-mail ou senha incorretos.', 401);
     }
 
@@ -239,8 +240,8 @@ async function alterarSenha(targetId, actorUser, body = {}) {
         throw new AppError('Usuário não encontrado.', 404);
     }
 
-    const atualValida = await bcrypt.compare(senhaAtual, normalizarHashBcrypt(user.senha));
-    if (!atualValida) {
+    const atualValida = await bcrypt.compare(senhaAtual, user.senha ? normalizarHashBcrypt(user.senha) : DUMMY_BCRYPT_HASH);
+    if (!user.senha || !atualValida) {
         throw new AppError('A senha atual está incorreta.', 401);
     }
 
@@ -249,15 +250,17 @@ async function alterarSenha(targetId, actorUser, body = {}) {
 }
 
 async function iniciarRecuperacaoSenha(emailRaw) {
+    // The legacy application has no email delivery. Returning the reset secret to
+    // an anonymous caller would bypass password proof during Google linking.
+    passwordResetMailer.assertConfigured();
     const email = String(emailRaw || '').trim().toLowerCase();
     if (!email || !EMAIL_REGEX.test(email)) {
         throw new AppError('Informe um e-mail válido.', 400);
     }
 
-    const user = await User.findOne({ email }).select('+resetPasswordToken +resetPasswordExpires');
-    if (!user) {
-        throw new AppError('E-mail não encontrado em nossa base de usuários.', 404);
-    }
+    const user = await User.findOne({ email }).select('+senha +resetPasswordToken +resetPasswordExpires');
+    // Uniform response avoids exposing whether the address has a local account.
+    if (!user?.senha) return { email };
 
     const rawToken = crypto.randomBytes(32).toString('hex');
     const tokenHash = crypto.createHash('sha256').update(rawToken).digest('hex');
@@ -266,8 +269,8 @@ async function iniciarRecuperacaoSenha(emailRaw) {
     user.resetPasswordExpires = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
     await user.save();
 
+    await passwordResetMailer.sendResetLink(user.email, rawToken);
     return {
-        token: rawToken,
         email: user.email,
     };
 }
@@ -295,7 +298,7 @@ async function redefinirSenha(body = {}) {
         resetPasswordExpires: { $gt: new Date() },
     }).select('+senha +resetPasswordToken +resetPasswordExpires');
 
-    if (!user) {
+    if (!user?.senha) {
         throw new AppError('Token de recuperação inválido ou expirado.', 400);
     }
 

@@ -40,12 +40,14 @@ function normalizarHorario(valor) {
     return 'qualquer';
 }
 
-function validarCadastroInput(body = {}) {
+function validarCadastroInput(body = {}, { google = false } = {}) {
     const nome = String(body.nome || '').trim();
     const email = String(body.email || '').trim().toLowerCase();
     const telefone = String(body.telefone || '').trim();
     const senha = String(body.senha || '');
-    const tipo = validarEnum(body.tipo || 'cliente', ['cliente', 'montador'], 'cliente');
+    const tipo = google
+        ? validarEnum(body.tipo, ['cliente', 'montador'])
+        : validarEnum(body.tipo || 'cliente', ['cliente', 'montador'], 'cliente');
 
     if (!nome || nome.length < 2) {
         throw new AppError('O nome é obrigatório.', 400);
@@ -56,8 +58,12 @@ function validarCadastroInput(body = {}) {
     if (!telefone) {
         throw new AppError('O telefone é obrigatório.', 400);
     }
-    if (senha.length < 6) {
+    if (!google && senha.length < 6) {
         throw new AppError('A senha deve ter no mínimo 6 caracteres.', 400);
+    }
+
+    if (google && body.termos !== true) {
+        throw new AppError('Aceite os Termos de Uso para continuar.', 400);
     }
 
     return {

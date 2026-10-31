@@ -1,0 +1,56 @@
+# Dependencies and package-manager caches
+node_modules/
+.npm-cache/
+.npm/
+.yarn/cache/
+.pnpm-store/
+
+# Environment and credentials (keep only the sanitized template)
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+client_secret*.json
+service-account*.json
+service_account*.json
+
+# Databases, dumps, local migration/audit records
+.mongodb-data/
+*.bson
+*.archive
+*.dump
+*.sql
+database/backups/
+/Relatorio_Auditoria_e_Migracao_Click_Montagem.pdf
+/relatorio_migracao.html
+
+# Logs, tests, generated files and temporary artifacts
+logs/
+*.log
+.test-artifacts/
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+dist/
+build/
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# Local agent/editor/OS state
+.codex/
+.agents/
+.aws/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

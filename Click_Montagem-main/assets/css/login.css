@@ -4,6 +4,39 @@
    ============================================ */
 
 /* ── Página ────────────────────────────────── */
+[hidden] { display: none !important; }
+
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #747775;
+    border-radius: 4px;
+    background: #fff;
+    color: #1f1f1f;
+    font: 500 14px 'Roboto', Arial, sans-serif;
+    letter-spacing: .25px;
+    cursor: pointer;
+}
+.google-button svg { flex-shrink: 0; }
+.google-button:hover:not(:disabled) { background: #f8faff; }
+.google-button:disabled { opacity: .65; cursor: wait; }
+.google-button:focus-visible, .google-secondary:focus-visible,
+.role-option input:focus-visible + .role-option-card { outline: 3px solid #4285f4; outline-offset: 3px; }
+.google-note { font-size: .85rem; text-align: center; color: var(--texto-claro); margin: 8px 0; }
+.google-note:empty { display: none; }
+.auth-divider { display: flex; align-items: center; gap: 12px; margin: 24px 0; font-size: .85rem; color: var(--texto-claro); }
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--bege-escuro); }
+.google-role { padding: 0; border: 0; min-width: 0; }
+.google-role legend { margin-bottom: 14px; color: var(--marrom-escuro); }
+.google-input { padding: 0 16px !important; }
+.google-secondary { display: block; margin: 20px auto 0; background: none; border: 0; color: var(--marrom-escuro); text-decoration: underline; cursor: pointer; padding: 8px; }
+#googleEmail { overflow-wrap: anywhere; }
+
 .login-page {
     min-height: 100vh;
     display: flex;

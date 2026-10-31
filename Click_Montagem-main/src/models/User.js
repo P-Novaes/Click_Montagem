@@ -50,21 +50,27 @@ const userSchema = new mongoose.Schema(
         },
         telefone: {
             type: String,
-            required: [true, 'O telefone é obrigatório.'],
+            required: function () { return this.cadastroCompleto !== false; },
             trim: true,
             maxlength: 30,
         },
         senha: {
             type: String,
-            required: [true, 'A senha é obrigatória.'],
+            required: function () { return !this.googleSub; },
             select: false,
         },
         tipo: {
             type: String,
-            enum: ['cliente', 'montador'],
+            enum: ['cliente', 'montador', null],
             default: 'cliente',
             index: true,
         },
+        googleSub: { type: String, minlength: 1, maxlength: 255 },
+        googleEmail: { type: String, maxlength: 160 },
+        googleEmailVerified: { type: Boolean, default: false },
+        authProvider: { type: String, enum: ['local', 'google', 'local+google'], default: 'local' },
+        cadastroCompleto: { type: Boolean, default: true },
+        termosAceitosEm: Date,
         cpf: { type: String, trim: true, default: '' },
         cidade: { type: String, trim: true, default: '' },
         cep: { type: String, trim: true, default: '' },
@@ -91,6 +97,11 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.index(
+    { googleSub: 1 },
+    { unique: true, partialFilterExpression: { googleSub: { $type: 'string' } } }
+);
+
+userSchema.index(
     { 'montador.cpf_cnpj': 1 },
     {
         unique: true,
@@ -108,6 +119,8 @@ userSchema.methods.toPublicObject = function toPublicObject(extra = {}) {
         email: this.email,
         telefone: this.telefone,
         tipo: this.tipo,
+        cadastroCompleto: this.cadastroCompleto !== false,
+        googleVinculado: Boolean(this.googleSub),
         cpf: this.cpf || '',
         cidade: this.cidade || '',
         cep: this.cep || '',

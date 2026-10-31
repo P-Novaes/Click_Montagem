@@ -36,10 +36,66 @@
             </div>
 
             <!-- Feedback -->
-            <div class="form-feedback" id="formFeedback">
+            <div class="form-feedback" id="formFeedback" role="status" aria-live="polite">
                 <i class="fas fa-exclamation-circle"></i>
                 <span id="feedbackText"></span>
             </div>
+
+            <div id="googleActions">
+                <button type="button" class="google-button" id="googleContinue" disabled>
+                    <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59C10.05 27.14 9.77 25.6 9.77 24s.27-3.14.77-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    <span>Continuar com Google</span>
+                </button>
+                <p id="googleAvailability" class="google-note" role="status">Verificando disponibilidade…</p>
+                <div class="auth-divider"><span>ou use e-mail e senha</span></div>
+            </div>
+
+            <form id="formGoogleCadastro" hidden>
+                <h2 class="form-title">Complete seu cadastro</h2>
+                <p class="form-subtitle">Conectado como <span id="googleEmail"></span>. Escolha como deseja usar o Click Montagem.</p>
+                <fieldset class="role-selection google-role">
+                    <legend>Tipo de conta *</legend>
+                    <div class="role-options">
+                        <label class="role-option">
+                            <input type="radio" name="googleRole" value="cliente" required>
+                            <span class="role-option-card"><i class="fas fa-user" aria-hidden="true"></i><strong>Sou Cliente</strong></span>
+                        </label>
+                        <label class="role-option">
+                            <input type="radio" name="googleRole" value="montador" required>
+                            <span class="role-option-card"><i class="fas fa-tools" aria-hidden="true"></i><strong>Sou Montador</strong></span>
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <label for="googleNome">Nome completo *</label>
+                    <input id="googleNome" class="form-control google-input" autocomplete="name" minlength="2" maxlength="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="googleTelefone">Telefone *</label>
+                    <input type="tel" id="googleTelefone" class="form-control google-input" autocomplete="tel" maxlength="30" required>
+                </div>
+                <div id="googleProfessional" hidden>
+                    <div class="form-group">
+                        <label for="googleDocumento">CPF/CNPJ (opcional)</label>
+                        <input id="googleDocumento" class="form-control google-input" maxlength="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="googleRegiao">Região de atendimento (opcional)</label>
+                        <input id="googleRegiao" class="form-control google-input" maxlength="120">
+                    </div>
+                </div>
+                <div class="form-checkbox">
+                    <input type="checkbox" id="googleTermos" required>
+                    <label for="googleTermos">Li e aceito os <a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
+                </div>
+                <button class="btn btn-primary btn-submit" type="submit">Concluir cadastro</button>
+                <button class="google-secondary" type="button" id="googleCancel">Sair desta conta</button>
+            </form>
 
             <!-- ========== FORMULÁRIO DE LOGIN ========== -->
             <form class="login-form active" id="formLogin">
@@ -67,6 +123,11 @@
 
                 <div class="forgot-password">
                     <a href="recuperar_senha.html">Esqueceu sua senha?</a>
+                </div>
+
+                <div class="form-checkbox" id="googleLinkOption" hidden>
+                    <input type="checkbox" id="googleLink">
+                    <label for="googleLink">Vincular Google à minha conta após confirmar minha senha.</label>
                 </div>
 
                 <button type="button" class="btn btn-primary btn-submit" onclick="handleLogin()">
@@ -172,5 +233,6 @@
     <!-- SCRIPTS -->
      <script src="../assets/js/api.js"></script>
     <script src="../assets/js/login.js"></script>
+    <script src="../assets/js/google-auth.js"></script>
 </body>
 </html>

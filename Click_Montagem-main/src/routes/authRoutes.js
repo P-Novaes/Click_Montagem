@@ -1,14 +1,29 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const authController = require('../controllers/authController');
+const googleController = require('../controllers/googleAuthController');
+const AppError = require('../utils/AppError');
 const { requireAuth } = require('../middlewares/auth');
 const env = require('../config/env');
 
 const router = express.Router();
+router.use((_req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Referrer-Policy', 'no-referrer');
+    next();
+});
+
+// OAuth starts/linking require CSRF even before authentication.
+const oauthCsrf = (req, _res, next) => {
+    if (!req.session?.csrfToken || req.get('X-CSRF-Token') !== req.session.csrfToken) {
+        return next(new AppError('Token de segurança inválido. Atualize a página.', 403));
+    }
+    next();
+};
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: env.isTest ? 1000 : 40,
+    max: () => env.isTest ? 1000 : 40,
     standardHeaders: true,
     legacyHeaders: false,
     message: {
@@ -18,6 +33,11 @@ const authLimiter = rateLimit({
 });
 
 // Rotas REST de Autenticação e Sessão
+router.get('/google/status', googleController.status);
+router.post('/google', authLimiter, oauthCsrf, googleController.start);
+router.post('/google/link', authLimiter, oauthCsrf, googleController.link);
+router.get('/google/callback', authLimiter, googleController.callback);
+router.post('/google/complete', authLimiter, oauthCsrf, googleController.complete);
 router.get('/csrf', authController.csrf);
 router.get('/me', authController.me);
 router.post('/cadastrar', authLimiter, authController.cadastrar);
