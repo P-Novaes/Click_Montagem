@@ -430,17 +430,11 @@
     transform: translateY(-1px);
 }
 .btn-ghost {
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 13px;
-    padding: 9px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--bege-escuro);
+  background: transparent; color: var(--bege-claro); font-size: 14px;
+  padding: 10px 20px; border: 1px solid var(--marrom-escuro);
 }
-.btn-ghost:hover {
-    border-color: var(--bark);
-    color: var(--texto);
-}
+.btn-ghost:hover { border-color: var(--dourado); background: var(--dourado); color: #fff; }
+.btn-lg { padding: 15px 28px; font-size: 16px; }
 .btn-lg {
     padding: 13px 24px;
     font-size: 14px;

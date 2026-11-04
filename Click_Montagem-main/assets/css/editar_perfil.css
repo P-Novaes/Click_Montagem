@@ -163,10 +163,11 @@ body { background: var(--bege-claro); color: var(--marrom-escuro); min-height: 1
 }
 .btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
 .btn-ghost {
-    background: transparent; color: var(--marrom-escuro); padding: 13px 24px;
-    border: 1px solid var(--borda);
+  background: transparent; color: var(--bege-claro); font-size: 14px;
+  padding: 10px 20px; border: 1px solid var(--marrom-escuro);
 }
 .btn-ghost:hover { border-color: var(--dourado); background: var(--dourado); color: #fff; }
+.btn-lg { padding: 15px 28px; font-size: 16px; }
 
 /* ---------- FOOTER ---------- */
 .footer {

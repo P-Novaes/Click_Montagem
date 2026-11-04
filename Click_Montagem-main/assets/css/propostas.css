@@ -349,19 +349,11 @@
 }
 
 .btn-ghost {
-    background: transparent;
-    color: var(--marrom-escuro);
-    border: 1px solid var(--marrom-escuro);
-    padding: 16px 28px;
-    flex: 0 0 auto;
-    text-align: center;
+  background: transparent; color: var(--bege-claro); font-size: 14px;
+  padding: 10px 20px; border: 1px solid var(--marrom-escuro);
 }
-
-.btn-ghost:hover {
-    border-color: var(--dourado);
-    background: var(--dourado);
-    color: #fff;
-}
+.btn-ghost:hover { border-color: var(--dourado); background: var(--dourado); color: #fff; }
+.btn-lg { padding: 15px 28px; font-size: 16px; }
 
 .sidebar-sticky {
     position: sticky;

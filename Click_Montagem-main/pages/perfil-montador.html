@@ -79,20 +79,7 @@
           </div>
         </div>
       </div>
-      <div class="profile-actions">
-        <div class="price-box">
-          <div class="price-from">A partir de</div>
-          <div class="price-val">
-            <span class="currency">R$</span><span class="amount">100</span>
-          </div>
-          <div class="price-desc">por serviço</div>
-          <!-- ✅ Corrigido: agora aponta para Novo Orçamento -->
-          <a href="orcamento.html">
-            <button class="btn btn-primary btn-full">Solicitar orçamento ↗</button>
-          </a>
-        </div>
-        <a href="login.html"><button class="btn btn-ghost btn-full">Enviar mensagem</button></a>
-      </div>
+      
     </div>
   </div>
 
@@ -295,5 +282,16 @@ function switchTab(el, tab) {
 }
 </script>
 
+  <!-- VLibras: Acessibilidade em Libras com Widget Responsivo -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
 </body>
 </html>

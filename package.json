@@ -9,6 +9,9 @@
     "seed": "npm --prefix ./Click_Montagem-main run seed",
     "migrate:mysql": "npm --prefix ./Click_Montagem-main run migrate:mysql",
     "test": "npm --prefix ./Click_Montagem-main test"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "mongoose": "^9.11.4"
   }
 }
-

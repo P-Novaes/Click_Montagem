@@ -54,12 +54,13 @@ function createApp() {
             contentSecurityPolicy: {
                 directives: {
                     defaultSrc: ["'self'"],
-                    scriptSrc: ["'self'", "'unsafe-inline'"],
+                    scriptSrc: ["'self'", "'unsafe-inline'", 'https://vlibras.gov.br'],
                     scriptSrcAttr: ["'unsafe-inline'"],
-                    styleSrc: ["'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com', 'https://fonts.googleapis.com'],
-                    fontSrc: ["'self'", 'https://cdnjs.cloudflare.com', 'https://fonts.gstatic.com', 'data:'],
+                    styleSrc: ["'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com', 'https://fonts.googleapis.com', 'https://vlibras.gov.br'],
+                    fontSrc: ["'self'", 'https://cdnjs.cloudflare.com', 'https://fonts.gstatic.com', 'data:', 'https://vlibras.gov.br'],
                     imgSrc: ["'self'", 'data:', 'blob:', 'https:'],
-                    connectSrc: ["'self'"],
+                    connectSrc: ["'self'", 'https://vlibras.gov.br'],
+                    frameSrc: ["'self'", 'https://vlibras.gov.br'],
                 },
             },
             crossOriginEmbedderPolicy: false,
